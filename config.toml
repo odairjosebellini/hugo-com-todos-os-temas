@@ -1,4 +1,4 @@
-baseURL = "https://site-gerado-hugo-hospedado-github.netlify.app"
+baseURL = "https://hugo-com-todos-os-temas.netlify.app"
 languageCode = "pt-br"
 title = "Meu primeiro site Hugo"
 #
