@@ -1,0 +1,56 @@
+{{- $curCtx := . -}}
+{{- $foundPrev := false -}}
+{{- $foundPage := false -}}
+{{- $curPage := false -}}
+{{- $prevPage := false -}}
+{{- $curNode := false -}}
+{{- with .menu_node -}}
+
+  {{- if .Parent -}}
+    {{/*Find the previous page*/}}
+    {{- $prevNodes := ( partial "generic-site-menu/nodes-included" ( dict "nodes" .Parent.Pages "menu_node" . "menu_type" "local-nav" ) ) -}}
+    {{- $curNode = . -}}
+
+    {{- if $prevNodes -}}
+      {{- range $prevNodes -}}
+        {{- $curPage = . -}}
+        {{- if eq $curPage $curNode -}}
+          {{- $foundPage = true -}}
+        {{- else if not $foundPage -}}
+          {{- $prevPage = $curPage -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- if and ( and $foundPage ( $curNode.IsAncestor $curCtx.cur_node ) ) ( ne $curNode $curCtx.cur_node ) -}}
+      {{/*For the ancestors of the current node, just stop at the current page*/}}
+      {{- if $curNode.RelPermalink -}}<a href="{{- $curNode.RelPermalink -}}">Prev</a>{{- end -}}
+    {{- else if and $foundPage $prevPage -}}
+      {{/*We found a previous page*/}}
+      {{/*descend into it's bottom leaf*/}}
+      {{- $prevChildNodes := ( partial "generic-site-menu/nodes-included" ( dict "nodes" $prevPage.Pages "menu_node" . "menu_type" "local-nav" ) ) -}}
+      {{- if not $prevChildNodes -}}
+        {{/*No previous child leaf, just go to previous page*/}}
+        {{- if $prevPage.RelPermalink -}}<a href="{{- $prevPage.RelPermalink -}}">Prev</a>{{- end -}}
+      {{- else -}}
+        {{/*Go to previous page's leaf node*/}}
+        {{- partial "navigation/local-nav/generate/findlastinsection" (dict "menu_node" $prevPage "cur_node" $curCtx.cur_node ) -}}
+      {{- end -}}
+    {{- else if $foundPage -}}
+      {{/*No previous node, but found ourselves*/}}
+      {{- if not .Parent.Parent -}}
+        <span>Prev</span>
+      {{ else }}
+        {{/*Go up one level and go to last previous leaf*/}}
+        {{- partial "navigation/local-nav/generate/prevrecurse" ( dict "cur_node" $curCtx.cur_node "menu_node" .Parent ) -}}
+      {{- end -}}
+    {{- else -}}
+      <span>Prev</span>
+    {{ end }}
+  {{- else }}
+    {{/* No parent */}}
+    <span>Prev</span>
+  {{ end }}
+{{- else }}
+<span>Prev</span>
+{{ end }}

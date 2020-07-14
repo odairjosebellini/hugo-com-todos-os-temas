@@ -1,0 +1,25 @@
+{{ define "main" }}
+	{{ if or .Title .Content }}
+	<div>
+		{{ with .Title }}<h1>{{ . }}</h1>{{ end }}
+		{{ with .Content }}<div>{{ . }}</div>{{ end }}
+	</div>
+	{{ end }}
+
+	{{ $pages := .RegularPages }}
+
+	{{ if .Sections }}
+	{{ range $section := .Sections }}
+	{{ $pages = union $pages $section.Pages }}
+	{{ end }}
+	{{ end }}
+	
+	{{ $sorted := sort $pages "Params.date" "desc" }}
+	{{ range $post := (.Paginate $sorted).Pages }}
+	{{ partial "list_preview" $post }}
+	{{ end }}
+
+	{{ if len $pages }}
+	{{ partial "pagination.html" . }}
+	{{ end }}
+{{ end }}

@@ -1,0 +1,14 @@
+{{- $curCtx := . -}}
+{{- with (index .curRegPage.Params ( .taxonomyType | pluralize ) ) -}}
+  <aside class="page-taxonomy-list {{ $curCtx.taxonomyType | pluralize }}-list">
+  {{- $taxSorted := sort . -}}
+  {{- $taxLinks := intersect (slice "3") (slice "4") -}}
+  {{- range $taxSorted -}}
+    {{- $taxLinks = $taxLinks | append (partial "generic-helpers/taxonomy/taxonomy-link" ( dict "taxonomyType" $curCtx.taxonomyType "curRegPage" $curCtx.curRegPage "taxonomyTerm" . ) ) -}}
+  {{- end -}}
+  {{- if reflect.IsSlice $taxLinks -}}
+    {{- $clean := apply $taxLinks "chomp" "." -}}
+    <span class="tags-label">{{ $curCtx.taxonomyType | pluralize | humanize }}: </span><span class="taxonomy-items {{ $curCtx.taxonomyType | pluralize | urlize }}-items" title="{{ $curCtx.taxonomyType | pluralize | humanize }}">{{ delimit $clean ", " }}</span>
+  {{- end -}}
+</aside>
+{{- end -}}

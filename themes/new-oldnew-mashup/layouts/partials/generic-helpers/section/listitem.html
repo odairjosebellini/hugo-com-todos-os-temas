@@ -1,0 +1,15 @@
+<!-- Copyright 2018 Daniel F. Dickinson
+     Released under the Creative Commons BY (Attribution) 4.0 License -->
+{{- $curCtx := . -}}
+{{- with .itemPage -}}
+  <li class="page-list-item">
+    <a class="page-list-link" href="{{ .Permalink }}"><span class="page-list-entry">{{ if .Title }}{{ .Title }}{{ else if .File }}{{ if .File.TranslationBaseName }}{{ .File.TranslationBaseName | title }}{{ end }}{{ end }}</span></a>
+    {{- if $curCtx.taxonomyPage -}}
+      {{- if $curCtx.taxonomyPage.Count -}}<span class="taxonomy-term-separator"> &mdash; </span><span class="taxonomy-term-count">{{- $curCtx.taxonomyPage.Count -}}</span>{{- end -}}{{- end -}}
+  {{- if (and (and .Data.Pages (not $curCtx.taxonomyPage) (ne $curCtx.menu_type "taxonomy-term" ) ) ) -}}
+    <ol class="page-list-parent">
+    {{ partial "generic-helpers/section/nesting" . }}
+    </ol>
+  {{- end -}}
+  </li>
+{{- end -}}

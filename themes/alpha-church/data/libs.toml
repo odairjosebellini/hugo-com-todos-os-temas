@@ -1,0 +1,28 @@
+# Versioning and Subresource Integrity (SRI) for Alpha-Church's JavaScript and CSS dependencies
+
+# When updating the version of an asset below, please also update the corresponding SRI.
+# To update the SRI for an entry visit https://www.srihash.org/
+# Or, the SRI for the appropriate asset can be copied from https://cdnjs.com/ .
+
+# JavaScript
+[js.leaflet]
+  version = "1.6.0"
+  integrity = "sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+
+[js.plyr]
+  #Make sure the hash is for the polyfilled version
+  version = "3.6.1"
+  integrity = "sha384-JIdG6JQfPhPXusD2gXnR4AyixjsSndggmkXTXANkuI1Kjk34eKHLrxzv9u02NkjW"
+
+[js.instantpage]
+  version = "5.1.0"
+  integrity = "sha384-by67kQnR+pyfy8yWP4kPO12fHKRLHZPfEsiSXR8u2IKcTdxD805MGUXBzVPnkLHw"
+
+# CSS
+[css.leaflet]
+  version = "1.6.0"
+  integrity = "sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+
+[css.plyr]
+  version = "3.6.1"
+  integrity = "sha384-tgmDxXIy3gEdfGLhfl9RguZk1DLdIsVgIDpI+0Ysl3U8wMzNw6b60rxrTTUoW/aw"

@@ -1,0 +1,142 @@
+@media print {
+  html {
+    & body {
+      & .default-body-wrapper,
+      & .homepage {
+        display: inline;
+        position: static;
+        width: auto;
+        & code {
+          max-width: none;
+          width: 100%;
+          & pre {
+            max-width: none;
+            width: 100%;
+          }
+        }
+        & pre {
+          max-width: none;
+          width: 100%;
+          & code {
+            max-width: none;
+            width: 100%;
+          }
+        }
+        & .highlight {
+          max-width: none;
+          width: 100%;
+          & pre {
+            max-width: none;
+            width: 100%;
+            & code {
+              max-width: none;
+              width: 100%;
+            }
+          }
+        }
+        & .top-bar {
+          display: block;
+          margin: .8em;
+          position: static;
+          width: auto;
+          z-index: 0;
+          & .site-badge {
+            display: inline-block;
+            position: static;
+            vertical-align: middle;
+            width: auto;
+            & .graphics-row {
+              display: inline-block;
+              position: static;
+              vertical-align: middle;
+              width: auto;
+              & .site-badge-graphic {
+                display: inline-block;
+                position: static;
+                width: 37px;
+              }
+            }
+            & .site-id {
+              display: inline-block;
+              position: static;
+              vertical-align: middle;
+              width: auto;
+            }
+          }
+          & .menubar-site-menu {
+            display: none;
+            position: static;
+            width: auto;
+            z-index: 0;
+          }
+        }
+        & .local-nav-bar {
+          display: none;
+          position: static;
+          width: auto;
+        }
+        & .section-nav-sitemap {
+          display: none;
+          position: static;
+          width: auto;
+        }
+        & .main,
+        & .section-page-main {
+          display: inline;
+          position: static;
+          width: auto;
+          & .main-article {
+            display: inline;
+            position: static;
+            width: auto;
+            & .regular-content {
+              display: inline;
+              position: static;
+              width: auto;
+            }
+            & .article-header {
+              display: inline;
+              position: static;
+              width: auto;
+            }
+            & .article-toc {
+              border: none;
+              display: inline;
+              position: static;
+              width: auto;
+            }
+          }
+          & .section-toc {
+            display: inline;
+            position: static;
+            width: auto;
+          }
+        }
+        & .sidebar {
+          display: none;
+          position: static;
+          width: auto;
+        }
+        & .page-footer {
+          display: inline;
+          position: static;
+          width: auto;
+          & .footer-links {
+            display: none;
+          }
+          & .colophon {
+            & .doc-date-block {
+              border: 0px none;
+              background-color: initial;
+              margin-top: .3em;
+              padding: 0;
+              & .label {
+                font-weight: normal;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

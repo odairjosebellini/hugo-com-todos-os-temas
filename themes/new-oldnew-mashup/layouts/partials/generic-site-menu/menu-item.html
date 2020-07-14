@@ -1,0 +1,3 @@
+          <div class="menu-entry-wrapper{{ if (eq .cur_node .menu_node ) }} current-page{{- end -}}">
+            <a class="menu-link" title="{{- if ne .menu_node.Title "" -}}{{- .menu_node.Title -}}{{- else -}}{{- .menu_node.File.TranslationBaseName | title -}}{{- end -}}" href="{{ .menu_node.RelPermalink }}"><span class="menu-entry">{{- if ne .menu_node.Title "" -}}{{- .menu_node.Title -}}{{- else -}}{{- .menu_node.File.TranslationBaseName | title -}}{{- end -}}</span></a>
+          </div>

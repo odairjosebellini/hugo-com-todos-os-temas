@@ -1,0 +1,41 @@
+
+<div>
+    <ul>
+	{{ if (and (ne .CurrentSection.IsHome true) (gt (len .CurrentSection.RegularPages) 0)) }}
+	<h4>{{ i18n "articles" }}</h4>
+	{{ template "current-section_pages" . }}
+	{{end}}
+	<hr>
+	{{ if gt (len .CurrentSection.Sections) 0}}
+	<h4>{{ i18n "subcategories" }}</h4>
+	{{ template "section-tree-nav" . }}
+	{{end}}
+	{{/* Show root level pages at home page after section tree */}}
+	{{ if (and (eq .CurrentSection.IsHome true) (gt (len .CurrentSection.RegularPages) 0)) }}
+	<h4>{{ i18n "articles" }}</h4>
+	{{ template "current-section_pages" . }}
+	{{end}}
+    </ul>
+</div>
+
+{{ define "section-tree-nav" }}
+{{ range .CurrentSection.Sections }}
+<li><h5><a href="{{.Permalink}}">{{ .LinkTitle }}</a></h5></li>
+{{ template "current-section_pages" . }} 
+<ul>
+    {{ template "section-tree-nav" . }}
+</ul>
+{{ end }}
+{{ end }}
+
+{{ define "current-section_pages" }}
+<ul>
+    {{ range .CurrentSection.RegularPages }}
+    {{ if (eq $.Permalink .Permalink) }}
+    <li>{{ .LinkTitle }}</li>
+    {{ else }}
+    <li><a href="{{.Permalink}}">{{ .LinkTitle }}</a>{{ with .PublishDate }}<span><small class="mx-1 text-muted">{{.Format "January 2, 2006"}}</small></span>{{ end }}</li>
+    {{ end }}
+    {{ end }}
+</ul>
+{{ end }}

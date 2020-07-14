@@ -1,0 +1,121 @@
+/*! Copyright 2007-2009,2017-2018 Daniel F. Dickinson <cshored@thecshore.com>
+ * Released under the Creative Commons BY (Attribution) 4.0 License
+ */
+
+// The C Shore Generic Styling Elements for the menubar
+
+// Remember, for the level of specificity last rule wins
+
+@mixin menu-entry {
+  & .menu-entry {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+@mixin menu-link {
+  & .menu-link {
+    @include menu-entry;
+
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+  }
+}
+
+@mixin menu-entry-wrapper {
+  & .menu-entry-wrapper {
+    @include menu-link;
+
+    display: block;
+    width: 100%;
+  }
+
+  &:active,
+  &:hover {
+    & > .menu-entry-wrapper {
+      background-color: $default-hover-background-color;
+      color: $default-hover-color;
+    }
+  }
+}
+
+@mixin active-menu-item-parent($on-display) {
+  & > LI {
+    &:active,
+    &:hover {
+      & > UL {
+        display: $on-display;
+      }
+    }
+  }
+}
+
+@mixin active-menu-parent($on-display) {
+  & > UL {
+    @include active-menu-item-parent($on-display);
+
+    display: $on-display;
+  }
+}
+
+@mixin menu-item-contents ($item-display, $on-display, $initial-z-index) {
+  @include menu-entry-wrapper;
+  @content;
+
+  display: $item-display;
+  list-style: none inside;
+  padding-bottom: 0;
+  width: 100%;
+
+  &:active,
+  &:hover {
+    @include enable-z-index($initial-z-index, top);
+    @include active-menu-parent($on-display);
+  }
+}
+
+@mixin list-menu-parent($initial-display, $on-display, $item-display) {
+  .menu-parent {
+    display: $initial-display;
+    left: auto;
+    list-style: none inside;
+    margin: 0;
+    opacity: 1;
+    padding: 0;
+    position: static;
+    width: 100%;
+
+    & .menu-item {
+      @include menu-item-contents($item-display, $initial-display, inherit) {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin list-menu-parent-parent($initial-display, $on-display, $item-display) {
+  & .menu-parent {
+
+    display: $initial-display;
+    left: auto;
+    list-style: none inside;
+    margin: 0;
+    opacity: 1;
+    padding: 0;
+    position: static;
+    width: 100%;
+
+    & .menu-item {
+      @include menu-item-contents($item-display, $on-display, inherit) {
+        @include list-menu-parent($initial-display, $on-display, $item-display);
+      }
+    }
+  }
+}
+
+.menu-parent {
+  margin-top: .2em;
+}

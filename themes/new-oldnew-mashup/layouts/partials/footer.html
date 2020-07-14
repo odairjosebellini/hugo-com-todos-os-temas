@@ -1,0 +1,13 @@
+{{/*Default Footer for OldNew Mashup Theme*/}}
+<footer aria-label="Page Footer" id="page-footer" class="page-footer">
+{{- block "footerlinks" . -}}
+  {{- if not (.Param "nofooterlinks") -}}
+    {{ partial "footer/links" . }}
+  {{- end -}}
+{{- end -}}
+{{- block "footercolophon" . -}}
+  {{- if not (.Param "nocolophon") -}}
+    {{ partial "footer/colophon" . }}
+  {{- end -}}
+{{- end -}}
+</footer>

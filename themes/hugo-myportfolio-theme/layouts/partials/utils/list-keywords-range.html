@@ -1,0 +1,25 @@
+{{/*
+    Parameters:
+    - type: "tags" or "categories"
+    - context: (project_sections)
+    - site: (Site)
+    - scratch: (Scratch)
+    - removeDuplicates: BOOL
+*/}}
+
+{{ .scratch.Delete .type }}
+{{ range .context }}
+    {{ with $.site.GetPage "section" . }}
+        {{ $params := (dict "type" $.type "context" . "scratch" $.scratch "removeDuplicates" $.removeDuplicates) }}
+        {{ partial "utils/get-keywords.html" $params }}
+    {{ end }}
+{{ end }}
+{{ .scratch.Set .type (uniq (.scratch.Get .type)) }}
+
+{{ range (.scratch.Get .type) }}
+    {{/* HACK: (replace . "#" "%23/") is a special case for "#" character */}}
+    <a href="{{ (print "/" $.type "/") | relLangURL }}{{ replace . "#" "%23/" | urlize }}" title="{{ . }}">
+        {{ . }}
+    </a>
+{{ end }}
+{{ .scratch.Delete .type }}

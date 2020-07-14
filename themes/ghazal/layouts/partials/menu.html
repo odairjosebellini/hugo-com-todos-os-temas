@@ -1,0 +1,55 @@
+<div
+  class="slide-menu collapsed"
+  style="
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: var(--bgTransparent);
+    position: fixed;
+    left: 0;
+    top: -100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  "
+>
+  <div
+    class="menu-container"
+    style="
+      background-color: var(--bgAbove);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 6px;
+      border: solid 1px var(--textColor);
+      border-radius: 5px;
+      box-shadow: 3px 3px 5px 2px var(--bgBelow);
+    "
+  >
+    <a class="menu-item" href="/"><i>{{ partial "icons/home" . }}</i>Home</a>
+
+    {{ range .Site.Sections.ByWeight }}
+    <a class="menu-item" href="{{ .Permalink }}"
+      ><i>{{ if .Params.icon }} {{ partial (print "icons/" .Params.icon) . }}
+      {{ else }} {{ partial "icons/folder" . }} {{ end }}</i>{{ .Title }}</a
+    >
+    {{ end }}
+  </div>
+</div>
+<script>
+  const slideMenu = document.querySelector(".slide-menu");
+  const menuContainer = document.querySelector(".menu-container");
+  slideMenu.addEventListener("click", (event) => {
+    if (event.target !== menuContainer){
+      const hamBurger = document.querySelector(".hamburger");
+      const cross = document.querySelector(".cross");
+      htmlDoc.style.overflowY = "scroll";
+      htmlDoc.style.marginRight = "0";
+      hamBurger.style.visibility = "visible";
+      cross.style.visibility = "hidden";
+      slideMenu.classList.add("collapsed");
+      slideMenu.style.top = "-100vh";
+    }
+  });
+</script>

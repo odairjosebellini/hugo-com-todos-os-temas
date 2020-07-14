@@ -1,0 +1,54 @@
+[about]
+other = "About"
+
+[articles]
+other = "Articles"
+
+[buy_me_a_coffee]
+other = "Buy me a coffee"
+
+[helpful]
+other = "Helpful?"
+
+[home-leadtext]
+other = '<p><strong>This is an example website</strong> to show how theme works <i class="fas fa-briefcase" aria-hidden="true"></i>.</p>'
+
+[image]
+other = "Image:"
+
+[kofi]
+other = "Buy Me a Coffee at ko-fi.com"
+
+[last-modified]
+other = "Last modified:"
+
+[latest-articles]
+other = "Latest articles"
+
+[license]
+other = "License:"
+
+[made-by]
+other = "Made by"
+
+[published]
+other = "Published:"
+
+[share]
+other = "Share?"
+
+[subcategories]
+other = "Subcategories"
+
+[tag]
+one = "Tag"
+other = "Tags"
+
+[taxonomies]
+other = "Categories"
+
+[translations]
+other = "Translations"
+
+[twitter-follow-us]
+other = "Follow us!"

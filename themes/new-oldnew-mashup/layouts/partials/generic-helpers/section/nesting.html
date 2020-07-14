@@ -1,0 +1,23 @@
+{{- $curCtx := . -}}
+{{- $nodes := ( partial "generic-site-menu/nodes-included" (dict "nodes" .Data.Pages "menu_node" . "menu_type" "section" ) ) -}}
+{{- if .Data.Terms -}}
+  {{- if eq ( .Title | lower | singularize ) "category" -}}
+    {{- $nodes = .Data.Terms.Alphabetical -}}
+   {{- else if eq ( .Title | lower | singularize ) "tag" -}}
+    {{- $nodes = .Data.Terms.ByCount -}}
+  {{- else -}}
+    {{- $nodes = .Data.Terms -}}
+  {{- end -}}
+  {{- range $nodes -}}
+    {{ partial "generic-helpers/section/listitem" (dict "itemPage" .Page "parentPage" $curCtx "taxonomyPage" . ) }}
+  {{- end -}}
+{{- else if .Data.Singular -}}
+  {{- $nodes = ( partial "generic-site-menu/nodes-included" (dict "nodes" .Data.Pages "menu_node" . "menu_type" "taxonomy-term" ) ) -}}
+  {{- range $nodes -}}
+    {{ partial "generic-helpers/section/listitem" (dict "itemPage" .Page "parentPage" $curCtx "menu_type" "taxonomy-term" ) }}
+  {{- end -}}
+{{- else -}}
+  {{- range $nodes -}}
+    {{ partial "generic-helpers/section/listitem" (dict "itemPage" . "parentPage" $curCtx ) }}
+  {{- end }}
+{{- end -}}

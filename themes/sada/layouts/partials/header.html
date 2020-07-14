@@ -1,0 +1,14 @@
+<script src="{{ `src/sada_main.js` | relURL }}"></script>
+<div class="d-flex flex-column border-bottom border-secondary pl-2 pr-2">
+  <h1 class="text-white mb-1">{{ .Site.Params.profile.name }}</h1>
+  <div class="d-flex flex-row justify-content-between">
+    {{ partial "social.html" . }}
+    <h3
+      class="toggleTheme text-white mt-2"
+      onclick="toggleTheme()"
+      title="toggle theme"
+    >
+      <i class="material-icons" style="cursor: pointer;">brightness_medium</i>
+    </h3>
+  </div>
+</div>

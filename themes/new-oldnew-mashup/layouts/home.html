@@ -1,0 +1,43 @@
+{{ define "title" }}
+  {{ if .Title }}
+    {{.Title}}
+  {{ else }}
+    {{ .Site.Title }}
+  {{ end }}
+{{ end }}
+{{ define "bodytag" }}
+  <body>
+{{ end }}
+{{ define "header" }}
+  <div class="homepage">
+    <!-- Copyright 2018-2019 Daniel F. Dickinson
+         Release under the Creative Commons BY (Attribution) 4.0 License -->
+    {{ partial "page-header" . }}
+{{ end }}
+{{ define "main" }}
+    <main id="main-content" class="main-content">
+      <h1 class="title">{{if not .Page.Title}}{{.Site.Title}}{{else}}{{.Page.Title}}{{end}}</h1>
+      <div class="taglines">
+        {{ if .Param "oneliner" }}
+          <h2 class="one-liner">{{ .Param "oneliner" }}</h2>
+          {{ if .Param "subliner" }}
+            <h3 class="sub-liner">{{ .Param "subliner" }}</h3>
+          {{ end }}
+        {{ end }}
+        {{ partial "generic-helpers/find-real-home/findnextpage" . }}
+      </div>
+      <aside class="aside">
+        {{ markdownify .Page.Params.aside}}
+      </aside>
+     {{ partial "splash-screenshots.html" . }}
+      <aside class="aside-footer">
+        {{ markdownify .Page.Params.asidefooter }}
+      </aside>
+    </main>
+{{ end }}
+{{ define "footer" }}
+  {{ partial "footer.html" . }}
+{{ end }}
+{{ define "sidebar" }}
+<!--no sidebar-->
+{{ end }}

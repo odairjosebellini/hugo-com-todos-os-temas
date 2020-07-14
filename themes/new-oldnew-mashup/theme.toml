@@ -1,0 +1,17 @@
+# See https://github.com/gohugoio/hugoThemes#themetoml for an example
+
+name = "OldNew Mashup"
+license = "CC-BY-4.0"
+licenselink = "https://github.com/cshoredaniel/new-oldnew-mashup/blob/master/LICENSE"
+description = "Modern HTML5 & CSS3 Hugo theme inspired by old-school themes"
+homepage = "https://new-oldnew-mashup.thecshore.com/"
+features = ['blog', 'high-contrast', 'a11y', 'accessibility','responsive','privacy']
+tags = ['old-school', 'modern', 'postmodern', 'high-contrast','responsive','privacy']
+min_version = "0.66.0"
+extended = false
+summaryLength = "60"
+
+[author]
+  name = "Daniel F. Dickinson"
+  homepage = "https://www.thecshore.com"
+  copyright = "© 2018-2020 Daniel F. Dickinson"

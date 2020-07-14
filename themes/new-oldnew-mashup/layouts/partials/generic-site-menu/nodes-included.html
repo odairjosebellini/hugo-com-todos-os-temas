@@ -1,0 +1,44 @@
+{{ $scratch := newScratch }}
+{{ $ctx := . }}
+{{ $allListTypes := ( slice "site" "section" "local-nav" "section-nav" "sidebar-news" "sidebar-recent" "sidebar-recent-changes" "sidebar-events" "sitemap" "taxonomy-term" "search-index") }}
+{{ $haveNode := false }}
+{{ $includeNode := false }}
+{{ with .menu_node }}
+  {{ if $ctx.nodes }}
+    {{ range $ctx.nodes }}
+      {{ $includeNode = true }}
+      {{ $not_in_lists := .Param "not_in_lists" }}
+      {{ if $not_in_lists }}
+        {{ if (in $not_in_lists $ctx.menu_type ) }}
+          {{/*If the current menu_type is excluded for this node*/}}
+          {{ $includeNode = false }}
+        {{ end }}
+      {{ end }}
+      {{ if ( in ( slice "taxonomy" "taxonomyTerm" ) .Kind ) }}
+        {{ $includeNode = false }}
+      {{ end }}
+      {{ if eq $ctx.exclude_self true }}
+         {{ if (eq $ctx.menu_node.Page .Page ) }}
+           {{ $includeNode = false }}
+         {{ end }}
+      {{ end }}
+      {{ if and (and $ctx.minSummaryLen $includeNode) (not (in .RawContent "summary-list-expansion" )) }}
+        {{ if and (lt (len .Summary) (int $ctx.minSummaryLen)) (not .Params.description) }}
+          {{ $includeNode = false }}
+        {{ end }}
+      {{ end }}
+      {{ if $includeNode }}
+        {{ if not $haveNode }}
+          {{ $scratch.Set "nodes_included" ( slice . ) }}
+          {{ $haveNode = true }}
+        {{ else }}
+          {{ $scratch.Add "nodes_included" . }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ if not $haveNode }}
+  {{ $scratch.Set "nodes_included" nil }}
+{{ end }}
+{{ return $scratch.Get "nodes_included" }}

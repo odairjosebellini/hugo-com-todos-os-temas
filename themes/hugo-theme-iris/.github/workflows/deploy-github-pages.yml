@@ -1,0 +1,58 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - '*.md'
+  schedule:
+    - cron: "13 13 * * *"
+
+jobs:
+  skipci:
+    runs-on: ubuntu-18.04
+    steps:
+      - run: echo "[skip ci] ${{ contains(github.event.head_commit.message, '[skip ci]') }}"
+
+  deploy:
+    runs-on: ubuntu-18.04
+    if: contains(github.event.head_commit.message, '[skip ci]') == false
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Read .env
+        id: hugo_version
+        run: |
+          . ./.env
+          echo "::set-output name=hugo_version::${HUGO_VERSION}"
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2.4.12
+        with:
+          hugo-version: "${{ steps.hugo_version.outputs.hugo_version }}"
+          extended: true
+
+      - name: Build
+        working-directory: ./exampleSite
+        run: |
+          export BASE_URL="https://hugothemeiris.peaceiris.app"
+          export GH_USER_ID="peaceiris"
+          bash ./scripts/fetch_data.sh "${{ secrets.GITHUB_TOKEN }}" "${GH_USER_ID}" | \
+            jq . > "./data/github/${GH_USER_ID}.json"
+          hugo --minify \
+            --themesDir ../../ \
+            --baseURL "${BASE_URL}" \
+            --i18n-warnings --path-warnings --debug \
+            --templateMetrics --templateMetricsHints
+          wget -O ./public/report.html "${BASE_URL}/report.html" || true
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          #deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./exampleSite/public
+          allow_empty_commit: true
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'

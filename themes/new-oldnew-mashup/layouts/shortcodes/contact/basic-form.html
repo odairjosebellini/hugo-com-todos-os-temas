@@ -1,0 +1,29 @@
+  <!-- Copyright 2019 Daniel F. Dickinson,
+       Released under the Creative Commons 4.0 BY (Attribution) License -->
+{{ $bURL := urls.Parse $.Site.BaseURL }}
+{{ $hostOnly := delimit (first 1 (split $bURL.Host ":")) ""}}
+{{ $port := int (.Get 0) }}
+{{ $liveURL := urls.Parse (.Get 1) }}
+{{ $isLive := false }}
+{{ if eq $bURL $liveURL }}
+  {{ $isLive = true }}
+{{ end }}
+{{ if and $port $isLive }}
+<form class="contact-form" action="{{ printf "%s://%s:%d" $bURL.Scheme $hostOnly $port }}" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+  <p><label for="name">Name:</label> <input type="text" name="name" id="name" /></p>
+  <p><label for="subject">Subject:</label> <input type="text" name="subject" id="subject" /></p>
+  <div class="contact-information-wrapper">
+    <label for="contact-information">Contact Information:</label>
+    <textarea class="contact-information" name="contact-information" id="contact-information"></textarea>
+  </div>
+  <div class="question-comment-wrapper">
+    <label for="question-comment">Question or Comment:</label>
+    <textarea class="question-comment" name="question-comment" id="question-comment"></textarea>
+  </div>
+  <p><input type="submit" value="Send" size="6" /> <input type="reset" value="Reset" size="6" /></p>
+</form>
+{{ else }}
+  {{ $altEmailName := .Get 2 }}
+  {{ $altEmailDomain := .Get 3 }}
+<div>No contact form available.  {{ if $altEmailName }}Please send an email to user '{{- $altEmailName -}}'{{ if $altEmailDomain }} at this domain ({{- $altEmailDomain -}}){{ end }}.{{ end }}</div>
+{{ end }}

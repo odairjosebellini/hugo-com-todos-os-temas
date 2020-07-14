@@ -1,0 +1,100 @@
+{{- define "css" -}}
+  {{- with .Resources.Match "images/lightbox/*.*" -}}
+    <link rel='stylesheet' href='{{ "css/baguetteBox.min.css" | relURL }}' />
+  {{- end -}}
+  {{- with .Resources.Match "images/gallery/*.*" -}}
+    <link rel='stylesheet' href='{{ "css/baguetteBox.min.css" | relURL }}' />
+  {{- end }}
+  {{ $pygmcss := resources.Get "css/pygments.css" }}
+  {{ $pygments := $pygmcss | resources.Minify | resources.Fingerprint }}
+  <link rel='stylesheet' href='{{ $pygments.RelPermalink }}' integrity='{{ $pygments.Data.integrity }}' />
+  {{- if .Site.Params.staticman -}}
+    {{ $smcss := resources.Get "css/staticman.css" }}
+    {{ $staticman := $smcss | resources.Minify }}
+    <link rel='stylesheet' href='{{ $staticman.RelPermalink }}' />
+  {{- end -}}
+{{- end -}}
+{{- define "title" -}}
+  {{ .Title }} – {{ .Site.Title }}
+{{- end -}}
+{{ define "main" }}
+      <article>
+        <header>
+          <h1>
+            <a href="{{ .Permalink }}">
+              {{- .Title -}}
+            </a>
+            <time datetime="{{ .Date.Format "02 Jan 06 15:04 +01:00" }}">
+              {{- .Date.Format "02/01/2006" -}}
+            </time>
+          </h1>
+          <div class="meta">
+          {{ range .Params.categories }}
+            <a class="categories" href="{{ "categories/" | relLangURL }}{{ . | urlize }}">
+              {{- . -}}
+            </a>
+          {{- end -}}
+          {{ range .Params.tags }}
+            <a class="tags" href="{{ "tags/" | relLangURL }}{{ . | urlize }}">
+              {{- . -}}
+            </a>
+          {{- end -}}
+          </div>
+        </header>
+        {{ with .Params.song -}}
+        <div class='nowlistening'>
+          {{ i18n "song" }} <a href='{{ .link }}'>{{ .title }}</a>
+        </div>
+        {{ end -}}
+        {{ if .TableOfContents -}}
+        <details>
+          <summary>{{ i18n "toc" }}</summary>
+          {{- $emtLiPtrn := "(?s)<ul>\\s<li>\\s<ul>(.*)</li>\\s</ul>" -}}
+          {{- $rplcEmtLi := "<ul>$1" -}}
+          {{ .TableOfContents | replaceRE $emtLiPtrn $rplcEmtLi | safeHTML }}
+        </details>
+        {{ end }}
+        {{ .Content }}
+        {{ with .Resources.Match "images/gallery/*.*" -}}
+          {{ partial "gallery" . }}
+        {{ end }}
+      </article>
+      {{ $related := .Site.RegularPages.Related . | first 5 }}
+      {{ with $related }}
+      <h3>{{ i18n "seeAlso" }}</h3>
+        <ul>
+        {{ range . }}
+          <li><a href='{{ .RelPermalink }}'>{{ .Title }}</a></li>
+        {{ end }}
+        </ul>
+      {{ end }}
+      {{ if .Site.Params.staticman }}
+        <script src='{{ "js/jquery.min.js" | relURL }}'></script>
+        {{ $smjs := resources.Get "js/staticman.js" | resources.ExecuteAsTemplate "js/staticman.js" .Site.Params.staticman }}
+        <script src='{{ $smjs.RelPermalink }}'></script>
+        {{ partial "staticman-comments.html" . }}
+        {{ if .Site.Params.staticman.reCaptcha }}
+        <script src="https://www.google.com/recaptcha/api.js?hl={{ .Site.Language }}"></script>
+        {{ end }}
+      {{ end }}
+      {{ with .Site.Params.isso_server }}
+      <script defer data-isso='{{ . }}' src='{{ . }}/js/embed.min.js' async></script>
+      <section id='isso-thread'></section>
+      {{ end }}
+{{ end }}
+{{- define "scripts" -}}
+      {{- with .Resources.Match "images/lightbox/*.*" -}}
+      <script src='{{ "js/baguetteBox.min.js" | relURL }}'></script>
+      <script>baguetteBox.run('figure', {
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+}});</script>
+      {{- end -}}
+      {{- with .Resources.Match "images/gallery/*.*" -}}
+      <script src='{{ "js/baguetteBox.min.js" | relURL }}'></script>
+      <script>baguetteBox.run('.gallery', {
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+}});</script>
+      {{- end -}}
+{{ end }}

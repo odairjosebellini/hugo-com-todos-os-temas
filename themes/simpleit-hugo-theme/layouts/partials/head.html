@@ -1,0 +1,61 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+{{- template "_internal/opengraph.html" . -}}
+{{- template "_internal/schema.html" . -}}
+{{- template "_internal/twitter_cards.html" . -}}
+
+{{- with .Params.sameas -}}{{range .}}
+<meta itemprop="sameAs" content="{{ . }}" />
+{{end}}{{end}}
+
+{{- with .Site.Params.google_verify_meta -}}
+<meta name="google-site-verification" content="{{ . }}" />
+{{ end }}
+
+{{- with .Site.Params.bing_verify_meta -}}
+<meta name="msvalidate.01" content="{{ . }}" />
+{{ end }}
+
+{{- with .Site.Params.yandex_verify_meta -}}
+<meta name="yandex-verification" content="{{ . }}" />
+{{ end }}
+
+{{- if .Site.Params.google_adsense_id -}}
+{{ partial "adsense_page_level_ads.html" . }}
+{{ end }}
+
+<meta property="description" content='{{ block "description" . }}{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}{{ end }}' />
+
+{{- with .Site.Params.author.name -}}
+<meta name="author" content="{{.}}">
+{{ end }}
+
+{{/* NOTE: the page title (if exists), and Site's title */}}
+<title>{{ block "title" . }}{{ if (and .Title (ne .Title .Site.Title))}}{{ .Title }} | {{ end }}{{ .Site.Title }}{{ end }}</title>
+
+<link rel="canonical" href="{{ .Permalink }}">
+
+<!-- BS4+Fontawesome5 free+Custom Styles -->
+{{ $options := (dict "targetPath" "css/style.css" "outputStyle" "compressed") }}
+{{ $style := resources.Get "sass/main.scss" | toCSS $options }}
+{{ $sharebuttons := resources.Get "css/sharebuttons.css" }} {{/*| resources.PostCSS (dict "noMap" true) */}}
+
+{{ $allstyle := slice $sharebuttons $style | resources.Concat "css/all.css" | minify | fingerprint }}
+
+<link rel="stylesheet" href="{{ $allstyle.Permalink }}" integrity="{{ $allstyle.Data.Integrity }}">
+
+{{ partial "google_analytics.html" . }}
+
+{{ if .Site.Params.cookie_consent_info_url }}
+{{ partial "cookie-consent.html" . }}
+{{ end }}
+
+{{ range .AlternativeOutputFormats -}}
+{{/* RSS feeds and other formats generator https://gohugo.io/templates/rss/#reference-your-rss-feed-in-head */}}
+{{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+{{ end -}}
+
+{{ partial "alternate_languages_pages.html" . }}
+
+{{ partial "head_custom" . }}

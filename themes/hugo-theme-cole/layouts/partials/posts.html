@@ -1,0 +1,10 @@
+<ul class="list control">
+    {{ $paginator := .Paginate (where (where .Site.RegularPages.ByDate.Reverse "Type" "in" .Site.Params.mainSections ) "Params.hidden" "!=" true) }}
+    {{ range $paginator.Pages }}
+        <li class="item">
+            <span class="date">{{ .PublishDate.Format "01-02" }}</span>
+            <a class="btn" href="{{ .Permalink }}"> {{ .Title }} </a>
+        </li>
+    {{ end }}
+    </ul>
+    {{ partial "pagination.html" .}}

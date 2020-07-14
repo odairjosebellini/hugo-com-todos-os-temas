@@ -1,0 +1,24 @@
+<footer id="colophon" class="site-footer">
+		{{ partial "footer/footer-widgets" . }}
+
+		<div class="site-info">
+			<a class="site-name" href="{{ .Site.BaseURL }}" rel="home">{{ .Site.Title }}</a>,
+			<a href="https://gohugo.io" class="imprint">
+				Proudly powered by Hugo
+			</a>
+
+			{{ with .Site.Params.privacy_link }}
+				<a href="{{ . }}" class="privacy-policy-link">Privacy Policy</a><span role="separator" aria-hidden="true"></span>
+			{{ end }}
+
+			<nav class="footer-navigation" aria-label="Footer Menu">
+				<ul id="menu-footer" class="footer-menu">
+					{{ range .Site.Menus.footer }}
+					<li class="menu-item">
+						<a href="{{ .URL }}">{{ .Name }}</a>
+					</li>
+				{{ end }}
+				</ul>
+			</nav><!-- .footer-navigation -->
+		</div><!-- .site-info -->
+	</footer><!-- #colophon -->

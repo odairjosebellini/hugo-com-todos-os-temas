@@ -1,0 +1,36 @@
+<!-- Copyright 2018-2020 Daniel F. Dickinson,
+     Released under the Creative Commons 4.0 BY (Attribution) License -->
+{{ $curNode := . }}
+{{ $nodes := slice }}
+{{ if and .IsPage .Parent }}
+  {{ $nodes = union (slice .Parent) .Parent.Pages }}
+{{ else if and .IsSection .Parent }}
+  {{ $nodes = union (slice .Parent .) .Parent.Pages }}
+{{ end }}
+{{ $parentNode := true }}
+{{ $nodesIncluded := (partial "generic-site-menu/nodes-included" ( dict "nodes" $nodes "menu_node" $curNode "menu_type" "section-nav" ) ) }}
+{{ if and $nodesIncluded (ne (.Param "norbar") true) }}
+  <nav id="section-nav-site-menu" class="section-nav-sitemap">
+  <h2>Navigation Menu</h2>
+  <ul class="sitemap-list menu-parent">
+  <!-- Copyright 2018-2020 Daniel F. Dickinson,
+       Released under the Creative Commons 4.0 BY (Attribution) License -->
+  {{ range $nodesIncluded }}
+    <li class="menu-item">
+    {{ partial "generic-site-menu/menu-item" (dict "menu_node" . "cur_node" $curNode) }}
+    {{ if not $parentNode }}
+      {{ if (and .IsSection ( eq $curNode . ) ) }}
+      <ul class="menu-parent has-submenu">
+        {{ partial "generic-site-menu/menu-section" ( dict "cur_node" $curNode "menu_node" . "menu_type" "section-nav" "nosub" "true" ) }}
+      </ul>
+      {{ end }}
+      </li>
+    {{ else }}
+      {{ $parentNode = false }}
+      <ul class="menu-parent has-submenu">
+    {{ end }}
+  {{ end }}
+      </ul>
+    </li>
+  </ul></nav>
+{{ end }}

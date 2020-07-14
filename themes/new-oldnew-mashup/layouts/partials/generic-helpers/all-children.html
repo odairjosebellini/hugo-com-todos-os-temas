@@ -1,0 +1,10 @@
+{{ $children := ( partial "generic-site-menu/nodes-included" (dict "nodes" ( union .Pages .Sections ) "menu_node" . "menu_type" "section" ) ) }}
+{{ if $children }}
+  {{ range $children }}
+    {{ $subChildren := (partial "generic-helpers/all-children" .) }}
+    {{ if $subChildren }}
+      {{ $children = $children | append $subChildren }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ return $children }}

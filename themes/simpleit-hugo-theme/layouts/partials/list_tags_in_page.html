@@ -1,0 +1,8 @@
+<i class="fas fa-tags"></i>
+{{$tags_taxonomy := index $.Site.Data.taxonomy_tags $.Site.Language.Lang }}
+{{$tags := $.Page.GetTerms $tags_taxonomy}}
+<strong>{{ T "tag" (len $tags)}}</strong>
+{{ range $i, $tag := $tags }}
+{{if gt $i 0}},{{end}} <a href="{{ $tag.Permalink }}">{{ title $tag.LinkTitle }}</a> 
+{{ end }}
+

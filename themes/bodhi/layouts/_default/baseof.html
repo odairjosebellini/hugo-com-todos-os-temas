@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		{{ partial "header.html" . }}
+	</head>
+
+	<body>
+		{{ partial "head.html" . }}
+		{{ partial "menu.html" . }}
+		<div id="content">
+			{{ partial "nav.html" . }}
+			<div id="main">
+				{{- block "main" . }}{{- end }}
+				{{ partial "footer.html" . }}
+			</div>
+			{{- block "footerfiles" . }}{{- end }}
+
+			{{ if and .Site.Params.fathomAnalytics .Site.Params.fathomAnalytics.siteID }}
+			{{- partial "fathom" . -}}
+			{{ end }}
+
+			{{ template "_internal/google_analytics_async.html" . }}
+		</div>
+		{{- with .Site.Params.Social -}}
+		<script>feather.replace({
+			width: "1em",
+			height: "1em",
+		})
+		</script>
+		{{- end }}
+		
+		<script src="{{ "/js/main.js" | relURL }}"></script>
+	</body>
+
+</html>

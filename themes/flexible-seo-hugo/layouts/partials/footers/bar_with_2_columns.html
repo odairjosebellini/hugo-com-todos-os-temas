@@ -1,0 +1,42 @@
+<footer class="mt-5 p-5 text-muted bg-secondary small">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-4 text-center text-md-left">
+        <ul class="nav flex-column">
+          {{- range $link, $name := .Site.Params.footerLinksColumn1 }}
+          <li class="nav-item">
+            <a class="nav-link text-light" href="{{ $link }}">{{ $name }}</a>
+          </li>
+          {{- end }}
+        </ul>
+      </div>
+      <div class="col-md-4 text-center text-md-right">
+        <ul class="nav flex-column">
+          {{- range $link, $name := .Site.Params.footerLinksColumn2 }}
+          <li class="nav-item">
+            <a class="nav-link text-light" href="{{ $link }}">{{ $name }}</a>
+          </li>
+          {{- end }}
+        </ul>
+      </div>
+    </div>
+    <div class="row justify-content-center mt-3">
+      <div class="col-md-4 text-center text-light">
+        <p class="mb-1 small">&copy;
+      {{- if .Site.Params.since }}
+        {{ .Site.Params.since }} -
+      {{- end }}
+      {{ .Site.LastChange.Format "2006" }}
+
+      {{- if .Site.Author.name }}
+        {{- if .Site.Author.website }}
+          <a href="{{ .Site.Author.website }}">{{ .Site.Author.name }}</a>
+        {{- else }}
+          {{ .Site.Author.name }}
+        {{- end }}
+      {{- end }}
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

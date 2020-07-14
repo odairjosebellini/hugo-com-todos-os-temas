@@ -1,0 +1,12 @@
+{{- define "main" -}}
+
+{{ partial "part.html" . }}
+{{ if .Pages }}
+<hr/>
+{{ end }}
+<nav class="nav flex-column">
+  {{ range .Pages.ByWeight }}
+  <p><b><a href="{{ .Permalink }}">{{ .Title }}</a></b>
+  {{ end }}
+</nav>
+{{- end -}}

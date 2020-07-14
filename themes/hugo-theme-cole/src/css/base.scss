@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+html {
+    font-size: calc(1vh + 1vw)
+}
+
+body {
+    margin     : 0;
+    font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
+}
+
+img {
+    height   : auto;
+    width    : 100%;
+    max-width: 40vw;
+}
+
+.no-break {
+    overflow     : hidden;
+    text-overflow: ellipsis;
+    white-space  : nowrap;
+}
+
+.control {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.btn {
+    cursor: pointer;
+    text-decoration: none;
+}

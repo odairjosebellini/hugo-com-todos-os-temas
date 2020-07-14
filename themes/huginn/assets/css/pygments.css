@@ -1,0 +1,81 @@
+/*
+ * Pygments generated from snow.vim using (https://github.com/honza/vim2pygments)
+ */
+.chroma .hll { background-color: #ffffcc }
+.chroma  { background: #2b2e32; color:#c9d3e2 }
+.chroma .c { color: #8c96a4 } /* Comment */
+.chroma .err { color:#c9d3e2 } /* Error */
+.chroma .esc { color:#c9d3e2 } /* Escape */
+.chroma .g { color:#c9d3e2 } /* Generic */
+.chroma .k { color: #799e7a } /* Keyword */
+.chroma .l { color:#c9d3e2 } /* Literal */
+.chroma .n { color:#c9d3e2 } /* Name */
+.chroma .o { color:#c9d3e2 } /* Operator */
+.chroma .x { color:#c9d3e2 } /* Other */
+.chroma .p { color:#c9d3e2 } /* Punctuation */
+.chroma .ch { color: #8c96a4 } /* Comment.Hashbang */
+.chroma .cm { color: #8c96a4 } /* Comment.Multiline */
+.chroma .cp { color: #5b9fa3 } /* Comment.Preproc */
+.chroma .cpf { color: #8c96a4 } /* Comment.PreprocFile */
+.chroma .c1 { color: #8c96a4 } /* Comment.Single */
+.chroma .cs { color: #8c96a4 } /* Comment.Special */
+.chroma .gd { color: #be8786 } /* Generic.Deleted */
+.chroma .ge { color:#c9d3e2; text-decoration: underline } /* Generic.Emph */
+.chroma .gr { color: #be8786 } /* Generic.Error */
+.chroma .gh { color:#c9d3e2; font-weight: bold } /* Generic.Heading */
+.chroma .gi { color: #799e7a } /* Generic.Inserted */
+.chroma .go { color:#c9d3e2 } /* Generic.Output */
+.chroma .gp { color:#c9d3e2 } /* Generic.Prompt */
+.chroma .gs { color:#c9d3e2 } /* Generic.Strong */
+.chroma .gu { color:#c9d3e2; font-weight: bold } /* Generic.Subheading */
+.chroma .gt { color: #be8786 } /* Generic.Traceback */
+.chroma .kc { color: #799e7a } /* Keyword.Constant */
+.chroma .kd { color: #799e7a } /* Keyword.Declaration */
+.chroma .kn { color: #799e7a } /* Keyword.Namespace */
+.chroma .kp { color: #799e7a } /* Keyword.Pseudo */
+.chroma .kr { color: #799e7a } /* Keyword.Reserved */
+.chroma .kt { color: #be8786 } /* Keyword.Type */
+.chroma .ld { color:#c9d3e2 } /* Literal.Date */
+.chroma .m { color: #7a97bd } /* Literal.Number */
+.chroma .s { color: #7a97bd } /* Literal.String */
+.chroma .na { color: #ad89ae } /* Name.Attribute */
+.chroma .nb { color:#c9d3e2 } /* Name.Builtin */
+.chroma .nc { color:#c9d3e2 } /* Name.Class */
+.chroma .no { color: #7a97bd } /* Name.Constant */
+.chroma .nd { color:#c9d3e2 } /* Name.Decorator */
+.chroma .ni { color: #a89263 } /* Name.Entity */
+.chroma .ne { color: #799e7a } /* Name.Exception */
+.chroma .nf { color: #ad89ae } /* Name.Function */
+.chroma .nl { color: #799e7a } /* Name.Label */
+.chroma .nn { color:#c9d3e2 } /* Name.Namespace */
+.chroma .nx { color:#c9d3e2 } /* Name.Other */
+.chroma .py { color:#c9d3e2 } /* Name.Property */
+.chroma .nt { color: #799e7a } /* Name.Tag */
+.chroma .nv { color: #ad89ae } /* Name.Variable */
+.chroma .ow { color: #799e7a } /* Operator.Word */
+.chroma .w { color:#c9d3e2} /* Text.Whitespace */
+.chroma .mb { color: #7a97bd } /* Literal.Number.Bin */
+.chroma .mf { color: #7a97bd } /* Literal.Number.Float */
+.chroma .mh { color: #7a97bd } /* Literal.Number.Hex */
+.chroma .mi { color: #7a97bd } /* Literal.Number.Integer */
+.chroma .mo { color: #7a97bd } /* Literal.Number.Oct */
+.chroma .sa { color: #7a97bd } /* Literal.String.Affix */
+.chroma .sb { color: #7a97bd } /* Literal.String.Backtick */
+.chroma .sc { color: #7a97bd } /* Literal.String.Char */
+.chroma .dl { color: #7a97bd } /* Literal.String.Delimiter */
+.chroma .sd { color: #7a97bd } /* Literal.String.Doc */
+.chroma .s2 { color: #7a97bd } /* Literal.String.Double */
+.chroma .se { color: #7a97bd } /* Literal.String.Escape */
+.chroma .sh { color: #7a97bd } /* Literal.String.Heredoc */
+.chroma .si { color: #7a97bd } /* Literal.String.Interpol */
+.chroma .sx { color: #7a97bd } /* Literal.String.Other */
+.chroma .sr { color: #7a97bd } /* Literal.String.Regex */
+.chroma .s1 { color: #7a97bd } /* Literal.String.Single */
+.chroma .ss { color: #7a97bd } /* Literal.String.Symbol */
+.chroma .bp { color:#c9d3e2 } /* Name.Builtin.Pseudo */
+.chroma .fm { color: #ad89ae } /* Name.Function.Magic */
+.chroma .vc { color: #ad89ae } /* Name.Variable.Class */
+.chroma .vg { color: #ad89ae } /* Name.Variable.Global */
+.chroma .vi { color: #ad89ae } /* Name.Variable.Instance */
+.chroma .vm { color: #ad89ae } /* Name.Variable.Magic */
+.chroma .il { color: #7a97bd } /* Literal.Number.Integer.Long */

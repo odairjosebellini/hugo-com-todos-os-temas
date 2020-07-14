@@ -1,0 +1,15 @@
+{{- $feedTitle := .Name -}}
+{{- if .Title -}}
+  {{- $feedTitle = .Title -}}
+{{- else if $.Site.Title -}}
+  {{- $feedTitle = $.Site.Title -}}
+{{- end -}}
+{{- $ctx := . -}}
+{{- if .IsPage -}}
+  {{- $ctx = .Parent -}}
+{{- end -}}
+{{- with $ctx -}}
+  {{- if .OutputFormats.Get "rss" -}}
+    {{- with .OutputFormats.Get "rss" -}}<span class="feed-link"><a href="{{ .Permalink }}" type="{{ .MediaType.Type }}" title="News Feed for {{ .MediaType.Type }}">RSS Feed</a></span>{{- end -}}
+  {{- end -}}
+{{- end -}}

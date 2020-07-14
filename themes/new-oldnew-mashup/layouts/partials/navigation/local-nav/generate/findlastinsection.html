@@ -1,0 +1,22 @@
+{{- $curCtx := . -}}
+{{- with .menu_node -}}
+  {{- $childNodes := ( partial "generic-site-menu/nodes-included" ( dict "nodes" .Pages "menu_node" . "menu_type" "local-nav" ) ) -}}
+  {{/*If there are sections below us*/}}
+  {{- if $childNodes -}}
+    {{- if (last 1 $childNodes ) -}}
+      {{/*Find child*/}}
+      {{- range (last 1 $childNodes ) -}}
+        {{/*repeat*/}}
+        {{- partial "navigation/local-nav/generate/findlastinsection" (dict "cur_node" $curCtx.cur_node "menu_node" . ) -}}
+      {{- end -}}
+    {{- else -}}
+      {{/*No children, we must be terminal*/}}
+      {{- if .RelPermalink -}}<a href="{{- .RelPermalink -}}">Prev</a>{{- end -}}
+    {{- end -}}
+  {{- else -}}
+    {{/*else we are the target*/}}
+    {{- if .RelPermalink -}}<a href="{{- .RelPermalink -}}">Prev</a>{{- end -}}
+  {{- end -}}
+{{- else }}
+<span>Prev</span>
+{{ end }}

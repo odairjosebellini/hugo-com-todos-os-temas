@@ -1,0 +1,43 @@
+<div class="footer-links">
+  {{- block "contact" . -}}
+    {{- if not (.Param "nocontact") -}}
+      {{ partial "footer/footer-links/contact" . }}
+    {{- end -}}
+  {{- end -}}
+  {{- block "sitemap" . -}}
+    {{- if not (.Param "nositemap") -}}
+      {{ partial "footer/footer-links/sitemap" . }}
+    {{- end -}}
+  {{- end -}}
+  {{- block "taxonomies" . -}}
+    {{- if not (.Param "nofootertaxonomies") -}}
+      {{ partial "footer/footer-links/taxonomies" . }}
+    {{- end -}}
+  {{- end -}}
+  {{- block "privacy" . -}}
+    {{- if not (.Param "noprivacy") -}}
+      {{ partial "footer/footer-links/privacy" . }}
+    {{- end -}}
+  {{- end -}}
+  {{- block "accessibility" . -}}
+    {{- if not (.Param "noaccessibility") -}}
+      {{ partial "footer/footer-links/accessibility" . }}
+    {{- end -}}
+  {{- end }}
+  {{- block "feedlink" . -}}
+    {{- if not (.Param "nofeedlink") -}}
+      {{ partial "footer/footer-links/feed-link" . }}
+    {{- end -}}
+  {{- end -}}
+  {{- block "getsource" . -}}
+    {{- if not ( .Param "nogetsource" ) -}}
+      {{ partial "footer/footer-links/getsource" . }}
+    {{- end -}}
+  {{- end -}}
+  {{- block "validator" . -}}
+    {{- if not (.Param "novalidator") -}}
+      {{ partial "footer/footer-links/validator" . }}
+    {{- end -}}
+  {{- end -}}
+</div>
+{{/* end Footer Links for OldNew Mashup Theme */}}

@@ -1,0 +1,4 @@
+{{- $footerPage := "/siteentry/contact" -}}
+{{- if .Param "footersection" -}}
+  {{- $footerPage = printf "/%s/contact" (.Param "footersection") -}}
+{{- end -}}{{- if .Site.GetPage $footerPage }}<span class="contact"><a href="{{ $footerPage | relURL }}" title="Contact Information">Contact</a></span>{{ end -}}

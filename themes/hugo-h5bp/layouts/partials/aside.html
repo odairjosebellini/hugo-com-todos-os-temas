@@ -1,0 +1,11 @@
+          <aside>
+                    <h3>Recent</h3>
+                    <ul>
+                        {{ $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
+                        {{ range first 10 $pages }}
+                        <li>        
+                            <a href="{{ .Permalink }}">{{ .Title }}</a>
+                        </li>
+                        {{ end }}
+                    </ul>
+                </aside>

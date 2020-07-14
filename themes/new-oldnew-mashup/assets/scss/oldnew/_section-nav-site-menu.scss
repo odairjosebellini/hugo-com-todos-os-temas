@@ -1,0 +1,192 @@
+.section-nav-sitemap {
+  display: block;
+  flex: 1 1 100%;
+  order: 3;
+  text-align: left;
+  width: 100%;
+
+  & h2 {
+    display: none;
+  }
+
+  & .sitemap-list {
+    list-style: none inside;
+    margin: 0;
+    padding: 0;
+
+    & .menu-link {
+      padding-bottom: .2em;
+      padding-top: .2em;
+    }
+
+    & > .menu-item {
+      @include menu-item-contents(inline-block, inline-block, inherit) {
+        text-align: left;
+
+        & .menu-entry-wrapper {
+          display: inline-block;
+          padding-left: 12px;
+        }
+      }
+
+      @include list-menu-parent-parent(inline-block, none, inline-block);
+
+      margin-bottom: .2em;
+    }
+
+    & .menu-item {
+      padding-bottom: 0;
+
+      & .menu-entry-wrapper.current-page { // sass-lint:disable-line force-element-nesting
+        border-left-color: $default-text-color;
+        padding-left: 12px;
+      }
+
+      & .menu-entry-wrapper {
+        background-color: $sidebar-menu-entry-row-background-color;
+      }
+
+      &:active,
+      &:hover {
+        & > .menu-entry-wrapper {
+          background-color: $default-hover-background-color;
+          color: $default-hover-color;
+        }
+      }
+
+    }
+  }
+}
+
+.section-nav-sitemap > .sitemap-list > .menu-item > .menu-parent { // sass-lint:disable-line force-element-nesting
+  display: inline-block;
+  width: 100%;
+}
+
+.section-nav-sitemap > .sitemap-list > .menu-item > .menu-parent > .menu-item > .menu-parent { // sass-lint:disable-line force-element-nesting
+  display: none;
+}
+
+.local-nav-bar {
+  background-color: $local-nav-background-color;
+  color: $local-nav-text-color;
+  display: block;
+  flex: 1 1 100%;
+  order: 1;
+  text-align: center;
+  width: 100%;
+
+  & a,
+  & span {
+    color: $local-nav-text-color;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    text-decoration: none;
+    width: 30%;
+
+    &:link,
+    &:visited,
+    &:active,
+    &:hover {
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      text-decoration: none;
+      width: 30%;
+    }
+
+    &:link,
+    &:visited {
+      color: $local-nav-link-color;
+    }
+
+    &:active,
+    &:hover {
+      background-color: $local-nav-hover-background-color;
+      color: $local-nav-hover-color;
+    }
+  }
+}
+
+@media screen and (min-height: 28em) and (min-width: 32em) {
+  .section-nav-sitemap {
+    background-color: $sidebar-box-background-color;
+    border-bottom: $sidebar-box-border $sidebar-box-border-color;
+    border-top: $sidebar-box-border $sidebar-box-border-color;
+    color: $sidebar-box-text-color;
+    display: block;
+    font-size: .9em;
+    grid-column-end: 2;
+    grid-column-start: 2;
+    grid-row-start: 3;
+    margin-bottom: .4em;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    max-width: 100%;
+    padding: .6em;
+    text-align: left;
+    width: 100%;
+
+    & h2 {
+      border-bottom: solid 1px;
+      display: block;
+      font-size: 1em;
+      margin-bottom: .4em;
+      margin-left: 0;
+      margin-right: .4em;
+      margin-top: 0;
+      padding-bottom: .4em;
+      padding-left: 0;
+      padding-right: 0;
+      padding-top: .4em;
+      width: 100%;
+    }
+
+    & .sitemap-list {
+      list-style: none inside;
+      margin: 0;
+      padding: initial;
+    }
+  }
+
+  .section-nav-sitemap > .sitemap-list > .menu-item > .menu-parent { // sass-lint:disable-line force-element-nesting
+    width: 80%;
+  }
+
+  .local-nav-bar {
+    font-size: .9em;
+    grid-column-end: 2;
+    grid-column-start: 2;
+    grid-row-start: 2;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: .4em;
+    margin-top: 0;
+    padding-bottom: 0;
+    padding-left: .5em;
+    padding-right: .4em;
+    padding-top: 0;
+  }
+}
+
+// sass-lint:disable no-vendor-prefixes
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .local-nav-bar {
+    display: block;
+    flex: 1 1 100%;
+    margin-bottom: .4em;
+    order: 2;
+    text-align: center;
+  }
+
+  .section-nav-sitemap {
+    display: block;
+    flex: 1 1 100%;
+    order: 5;
+    text-align: left;
+  }
+}

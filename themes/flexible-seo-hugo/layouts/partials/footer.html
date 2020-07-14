@@ -1,0 +1,9 @@
+{{- $footer_type := .Site.Params.footerType | default "simple" }}
+{{- $footer_file := printf "footers/%s.html" $footer_type }}
+{{- partial $footer_file . }}
+
+<script src="/js/jquery.slim.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+
+{{- partial "footer_custom.html" . }}

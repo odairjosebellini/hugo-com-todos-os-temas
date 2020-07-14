@@ -1,0 +1,6 @@
+{{- $.Scratch.Add "index" slice -}}
+{{- $nodes := ( partial "generic-site-menu/nodes-included" ( dict "nodes" .Site.RegularPages "menu_node" . "menu_type" "search-index" ) ) -}}
+{{- range $nodes -}}
+    {{- $.Scratch.Add "index" (dict "title" .Title "tags" .Params.tags "categories" .Params.categories  "content" .Plain "permalink" .Permalink) -}}
+{{- end -}}
+{{- $.Scratch.Get "index" | jsonify -}}

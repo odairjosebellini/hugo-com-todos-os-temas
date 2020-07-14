@@ -1,0 +1,27 @@
+<div
+  class="social-icons"
+  style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
+  "
+>
+  {{ range $key, $val := .Site.Params.social }}
+
+  <a href="{{ $val }}" aria-label="{{ $key }}">
+    <i
+      class="social-icon"
+      style="
+        display: inline-flex;
+        font-size: 1.6em;
+        padding: 10px;
+        border-radius: 50%;
+        align-self: center;
+      "
+      >{{ partial (print "icons/" $key ".html") . }}</i
+    ></a
+  >
+
+  {{ end }}
+</div>

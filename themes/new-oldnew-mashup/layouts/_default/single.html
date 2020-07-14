@@ -1,0 +1,21 @@
+{{/* Copyright 2018-2019 Daniel F. Dickinson.  Released under the
+  Creative Commons BY (Attribution) 4.0 License */}}
+{{- define "header" -}}
+  {{- if (eq .CurrentSection.File.Dir "projects/bots-and-bytes-fall-2019/") -}}
+  <div class="bots-bytes-body-wrapper">
+  {{- else -}}
+  <div class="default-body-wrapper">
+  {{ end }}
+    {{ partial "page-header" . }}
+{{ end }}
+{{ define "main-footer" }}
+  {{ $related := .Site.RegularPages.Related . | first 5 }}
+  {{ with $related }}
+  <h3>See Also</h3>
+  <ul>
+  	{{ range . }}
+  	<li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+  	{{ end }}
+  </ul>
+  {{ end }}
+{{ end }}

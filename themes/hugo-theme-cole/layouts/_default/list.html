@@ -1,0 +1,19 @@
+{{ partial "head.html" . }}
+
+<body>
+    {{ partial "header.html" . }}
+    <ul class="list control">
+        {{ $paginator := .Paginate (where .Pages "Params.hidden" "!=" true) }}
+        {{ range $paginator.Pages }}
+        <li class="item">
+            <span class="date">{{ .PublishDate.Format "01-02" }}</span>
+            <a class="btn" href="{{ .Permalink }}"> {{ .Title }} </a>
+        </li>
+        {{ end }}
+    </ul>
+    {{ partial "pagination.html" .}}
+    {{ partial "footer.html" .}}
+    {{ partial "js.html" . }}
+</body>
+
+</html>

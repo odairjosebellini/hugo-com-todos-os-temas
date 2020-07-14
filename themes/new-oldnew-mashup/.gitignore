@@ -1,0 +1,39 @@
+*.swp
+*~
+*.bak
+\#*#
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+/exampleSite/node_modules
+/node_modules
+
+# Optional npm cache directory
+/.npm
+/exampleSite/.npm
+
+# Optional eslint cache
+/.eslintcache
+/exampleSite/.eslintcache
+
+# dotenv environment variables file
+/.env
+/exampleSite/.env
+
+# Additional
+/release
+/public
+/exampleSite/public
+/build
+/exampleSite/themes
+/binaries

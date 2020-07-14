@@ -1,0 +1,52 @@
+{{ define "main" }}
+{{- $showBreadcrumbs := $.Params.showBreadcrumbs | default $.Site.Params.showBreadcrumbs | default true }}
+<div class="container" role="main">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+  {{ if eq $showBreadcrumbs true -}}
+    {{ partial "breadcrumbs.html" ( dict "ctx" . "output_type" "list" ) }}
+  {{- end }}
+    </div>
+  </div>
+  <article>
+    <div class="row justify-content-center">
+      {{ if (.Params.sidemenu) }}
+        {{ $sidemenu := .Site.GetPage .Params.sidemenu }}
+        <div class="offset-lg-2 col-lg-8">
+          {{ .Content }}
+          {{ if .Params.tags -}}
+          <div class="blog-tags">
+            {{ range .Params.tags -}}
+            <a href="{{ $.Site.LanguagePrefix | absURL }}tags/{{ . | urlize }}/">{{ . }}</a>&nbsp;
+            {{ end }}
+          </div>
+          {{ end }}
+        </div>
+        <div class="col-lg-2 d-none d-lg-block">
+        {{ with $sidemenu }}
+          {{ .Content }}
+        {{ end }}
+        </div>
+      {{ else }}
+        <div class="col-lg-8">
+          {{ .Content }}
+          {{ if .Params.tags -}}
+          <div class="blog-tags">
+            {{ range .Params.tags -}}
+            <a href="{{ $.Site.LanguagePrefix | absURL }}tags/{{ . | urlize }}/">{{ . }}</a>&nbsp;
+            {{ end }}
+          </div>
+          {{ end }}
+        </div>
+      {{ end }}
+    </div>
+    {{ if and .Site.DisqusShortname ( ne .Params.comments false ) -}}
+    <div class="row justify-content-center pt-3">
+      <div class="col-lg-8">
+        {{ template "_internal/disqus.html" . }}
+      </div>
+    </div>
+    {{ end }}
+  </article>
+</div>
+{{ end }}

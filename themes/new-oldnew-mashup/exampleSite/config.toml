@@ -1,0 +1,124 @@
+# Config for using theme as Hugo website
+
+baseURL = 'https://example.com/'
+languageCode = 'en-ca'
+languageLang = 'en'
+title = 'Oldnew Mashup'
+enableGitInfo = true
+theme = 'new-oldnew-mashup'
+summaryLength = 60
+description = "Sample site for OldNew Mashup Theme (the new version)"
+themesDir = "../.."
+min_version = "0.66.0"
+extended = false
+
+[params]
+  siteid = 'OldNew Mashup'
+  licenses = ['CC-BY-4.0']
+  default_page_licenses = ['CC-BY-4.0']
+  copyright = '© 2018-2020 Daniel F. Dickinson'
+  git_hub_repo = 'cshoredaniel/new-oldnew-mashup'
+  rssfeedlink = true
+  validatorlink = true
+  site_badge_graphic = "/images/sample_image.png"
+  site_badge_graphic_alt_text = "[Logo for Hugo OldNew Mashup Theme Homepage]"
+  splash_images_bundle = "/siteentry/splash-images"
+  enable_search = true
+  time_types = ["Viverra Justo", "Ipsum", "news"]
+  recent_additions = "/siteentry/recent-additions"
+  recent_changes = "/siteentry/recent-changes"
+  recent_events = "/siteentry/recent-events"
+  recent_news = "/siteentry/recent-news"
+  nobaseurl = false
+  homepage_title_background_color = "#ccf"
+  homepage_title_text_color = "#114"
+
+[outputs]
+  home = ["HTML", "JSON", "RSS"]
+
+[frontmatter]
+  lastmod = ["lastmod",":git","date","publishDate"]
+  date = ["publishDate","date"]
+
+[build]
+  useResourceCacheWhen = "fallback"
+
+[privacy]
+  [privacy.disqus]
+    disable = true
+  [privacy.googleAnalytics]
+    disable = true
+  [privacy.instagram]
+    disable = true
+  [privacy.twitter]
+    disable = true
+  [privacy.vimeo]
+    disable = true
+  [privacy.youtube]
+    disable = true
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+  license = "licenses"
+
+[module]
+
+[module.hugoVersion]
+  min = "0.66.0"
+  extended = false 
+
+  [[module.mounts]]
+    source = "layouts"
+    target = "layouts"
+
+  [[module.mounts]]
+    source = "assets"
+    target = "assets"
+
+  [[module.mounts]]
+    source = "static"
+    target = "static"
+
+  [[module.mounts]]
+    source = "data"
+    target = "data"
+
+  [[module.mounts]]
+    source = "i18n"
+    target = "i18n"
+
+  [[module.mounts]]
+    source = "archetypes"
+    target = "archetypes"
+
+[author]
+  name = "Daniel F. Dickinson"
+  homepage = "https://www.thecshore.com"
+  copyright = "©2009-2020 Daniel F. Dickinson"
+  email = "<cshored@thecshore.com>"
+
+[related]
+  threshold = 90
+  includeNewer = true
+  toLower = true
+
+  [[related.indices]]
+    name = "categories"
+    weight = 60
+
+  [[related.indices]]
+    name = "tags"
+    weight = 40
+
+  [[related.indices]]
+    name = "description"
+    weight = 100
+
+  [[related.indices]]
+    name = "type"
+    weight = 20
+
+  [[related.indices]]
+    name = "date"
+    weight = 10

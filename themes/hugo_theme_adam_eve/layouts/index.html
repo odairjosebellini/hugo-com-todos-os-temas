@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+
+<head>
+  {{ partial "header.html" . }}
+</head>
+
+<body>
+  {{ if isset .Site.Params "nohomebar" }}
+  <!-- No homepage menu bar -->
+  {{ else if .Site.Menus.main }}
+    {{ partial "menu.html" . }}
+  {{ end }}
+  <header style="text-align: center;">
+    {{ partial "site_title.html" . }}
+  <hr />
+  </header>
+  <main>
+  {{ .Content }}
+  {{ $pages := where .Site.RegularPages "Type" "post" }}
+  {{ if isset .Site.Params "nohomepagepostlist" }}
+  <!-- No homepage post list -->
+  {{ else if ne (len $pages) 0 }}
+    <h1>Posts</h1>
+    <ul>
+    {{ range $pages.ByTitle }}
+    <li><a href="{{ .Permalink }}">{{ .Name }}</a></li>
+    {{ end }}
+    </ul>
+  {{ end }}
+  </main>
+  <footer>
+    <hr />
+    {{ partial "footer.html" . }}
+  </footer>
+</body>
+</html>

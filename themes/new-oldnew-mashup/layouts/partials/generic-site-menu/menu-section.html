@@ -1,0 +1,25 @@
+{{/* Copyright 2019-2020 Daniel F. Dickinson, Released under the
+  Creative Commons 4.0 BY (Attribution) License */}}
+{{- $curCtx := . -}}
+{{- with .menu_node -}}
+  {{- $nodes := ( partial "generic-site-menu/nodes-included" ( dict "nodes" .Pages "menu_node" . "menu_type" $curCtx.menu_type ) ) -}}
+  {{- range $nodes -}}
+    {{- $max_rows_per_column := .Param "max_rows_per_column" | default 8 -}}
+    {{- $max_columns := .Param "max_columns" | default 3 -}}
+    {{- $max_items := mul $max_rows_per_column $max_columns -}}
+
+           <li class="menu-item">
+    {{ partial "generic-site-menu/menu-item" (dict "menu_node" . "cur_node" $curCtx.cur_node ) }}
+    {{- if (or (eq .Kind "page" ) (eq $curCtx.nosub "true") ) -}}
+           </li>
+    {{- else if (and (eq .Kind "section" ) .Data.Pages) -}}
+             <ul class="menu-parent{{ if gt (len .Data.Pages) 0 }} has-submenu{{ end }}{{ if gt (len .Data.Pages) $max_rows_per_column }} needs-columns{{ end }}{{ if gt (len .Data.Pages) $max_items }} needs-overflow{{ end }}">
+        {{ partial "generic-site-menu/menu-section" ( dict "cur_node" $curCtx.cur_node "menu_node" . "menu_type" $curCtx.menu_type ) }}
+             </ul>
+           </li>
+    {{- else -}}
+      {{/* Unknown .Kind */}}
+           </li>
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

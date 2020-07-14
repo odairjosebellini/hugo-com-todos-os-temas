@@ -1,0 +1,29 @@
+<div id="nav">
+  {{- $currentPage := . -}}
+  
+  {{ range .Site.Menus.nav }}
+  {{ $menuentry := . }}
+  {{ $menuPage := $.Site.GetPage $menuentry.URL }}
+  <ul>
+    <li>
+      {{ if eq $currentPage $menuPage }}<b>{{ end }}
+        <a href="{{.URL | relURL }}">
+          <span>{{ .Name }} {{ if .Children }}/{{ end }}</span>
+        </a>
+      {{ if eq $currentPage $menuPage }}</b>{{ end }}
+
+      {{ range .Children }}
+        {{ $menuChildPage := $.Site.GetPage .URL }}
+
+        <ul>
+          <li>
+            {{ if eq $currentPage $menuChildPage }}<b>{{ end }}
+              <a href="{{ .URL | relURL }}">{{ .Name }}</a>
+            {{ if eq $currentPage $menuChildPage }}</b>{{ end }}
+          </li>
+        </ul>
+      {{ end }}
+    </li>
+  </ul>
+  {{ end }}
+</div>

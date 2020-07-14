@@ -1,0 +1,35 @@
+@mixin normaltextlinks {
+  a {
+    &:link,
+    &:visited,
+    &:active,
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+@mixin enable-z-index($initial-z-index, $topbottom) {
+  #{$topbottom}: 0;
+  position: relative;
+  z-index: $initial-z-index;
+}
+
+@mixin utility-box($utility-box-border, $utility-box-border-color, $utility-box-text-color) {
+  border: $utility-box-border $utility-box-border-color;
+  color: $utility-box-text-color;
+  padding: .6em;
+  text-align: left;
+  @content;
+}
+
+@mixin rollup-section-named ($rollup-section-name) {
+  & .#{$rollup-section-name}-block {
+    @content;
+  }
+}
+@mixin rollup-section-color-named($rollup-section-name) {
+  & .#{$rollup-section-name}-block {
+    @content;
+  }
+}

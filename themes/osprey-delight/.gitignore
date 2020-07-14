@@ -1,0 +1,10 @@
+
+/public/
+/exampleSite/public/
+
+workspace
+
+# /resources/*
+# static/*/*-*.min.*
+
+.env

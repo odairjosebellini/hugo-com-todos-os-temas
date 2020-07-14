@@ -1,0 +1,12 @@
+<div class="colophon">
+  {{- block "license" . -}}
+    {{- if not (.Param "nolicense") -}}
+      {{ partial "footer/colophon/license" . }}
+    {{- end -}}
+  {{- end -}}
+  {{- block "docdate" . -}}
+    {{- if not (.Param "nodocdate") -}}
+      {{ partial "footer/colophon/doc-date" . }}
+    {{- end -}}
+  {{- end -}}
+</div>

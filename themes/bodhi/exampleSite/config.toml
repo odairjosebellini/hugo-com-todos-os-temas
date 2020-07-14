@@ -1,0 +1,59 @@
+baseURL = "https://example.com/"
+languageCode = "en-us"
+title = "Bodhi Theme"
+theme = "bodhi"
+
+[params]
+    subtitle = "simple and minimal."
+    avatar = "/avatar.png"
+    author = "Rohan Verma"
+    commentoSrc = "https://commento.example.com/js/commento.js"
+    footerMessage = "Keep it simple."
+    disableSearch = false
+
+[[menu.main]]
+name = "home"
+url = "/"
+weight = 1
+
+[[menu.main_right]]
+name = "about"
+url = "/about/"
+weight = 1
+
+[[menu.nav]]
+name = "blogs"
+url = "/blog"
+weight = 1
+
+[[menu.nav]]
+parent = "blogs"
+name = "tags"
+url = "/tags"
+weight = 2
+
+[[menu.nav]]
+parent = "blogs"
+name = "categories"
+url = "/categories"
+weight = 3
+
+[markup.goldmark.renderer]
+unsafe= true
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+[markup]
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    lineNoStart = 1
+    noClasses = true
+    style = "emacs"
+    tabWidth = 4
+
+[[params.social]]
+name = "Github"
+icon = "github"
+url = "https://github.com/rhnvrm/bodhi"

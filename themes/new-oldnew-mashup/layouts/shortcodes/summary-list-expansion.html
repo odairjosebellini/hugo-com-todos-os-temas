@@ -1,0 +1,52 @@
+{{ $pageType := .Get 0 }}
+{{ $getItemCount := .Get 1 }}
+{{ $itemCount := 15 }}
+{{ if and $getItemCount (ne $getItemCount "" ) }}
+  {{ $itemCount = int $getItemCount }}
+{{ end }}
+{{ $curPage := .Page }}
+{{ $menuType := (printf "%s-%s" "sidebar" $pageType) }}
+{{ $startNodes := (where (where .Site.RegularPages ".Params.date" "!=" nil ) "Type" "!=" "news" ) }}
+{{ if eq $pageType "recent-changes" }}
+  {{ $startNodes = (where (where .Site.RegularPages ".Params.lastmod" "!=" nil ) "Type" "!=" "news" ) }}
+{{ else if (ne $pageType "recent") }}
+  {{ $startNodes = (where (where .Site.RegularPages "Type" $pageType) ".Params.date" "!=" nil) }}
+{{ end }}
+{{ $nodes := ( partial "generic-site-menu/nodes-included" (dict "nodes" $startNodes "menu_node" . "menu_type" $menuType "exclude_self" true "minSummaryLen" 10 ) ) }}
+{{ if and (eq $pageType "recent-changes") $nodes }}
+  {{ range first $itemCount $nodes.ByLastmod.Reverse }}
+    {{ if and (ne .Page $curPage) (not (in .RawContent "summary-list-expansion") ) }}
+  <section class="recent-changes">
+    <header class="recent-changes-header">
+      <h3><a href='{{ .Permalink }}'>{{ if .Title }}{{ .Title }}{{ else }}{{ .File.TranslationBaseName | title }}{{ end }}</a></h3>
+      <div class="page-metadata">{{ if .Lastmod }}{{ .Lastmod.Format "Jan 2, 2006 15:04 MST" }}{{ end }}</div>
+    </header>
+
+    <div>{{ if .Page.Params.description }}{{ .Page.Params.description }}{{ else }}{{ .Summary }}{{ end }}</div>
+    <footer class="recent-changes-footer">
+      {{ if (or .Truncated .Page.Params.description) }}
+      <a href='{{ .RelPermalink }}'>Read full article for "{{ if .Title }}{{ .Title }}{{ else }}{{ .File.TranslationBaseName | title }}{{ end }}"</a>
+      {{ end }}
+    </footer>
+  </section>
+    {{ end }}
+  {{ end }}
+{{ else if (and $nodes (ne $pageType "recent-changes")) }}
+  {{ range first $itemCount $nodes.ByDate.Reverse }}
+    {{ if and (ne .Page $curPage) (not (in .RawContent "summary-list-expansion") ) }}
+  <section class="recent-changes">
+    <header class="recent-changes-header">
+      <h3><a href='{{ .Permalink }}'>{{ if .Title }}{{ .Title }}{{ else }}{{ .File.TranslationBaseName | title }}{{ end }}</a></h3>
+      <div class="page-metadata">{{ if .Date }}{{ .Date.Format "Jan 2, 2006 15:04 MST" }}{{ else }}{{ .Lastmod.Format "Jan 2, 2006 15:04 MST" }}{{ end }}</div>
+    </header>
+
+    <div>{{ if .Page.Params.description }}{{ .Page.Params.description }}{{ else }}{{ .Summary }}{{ end }}</div>
+    <footer class="recent-changes-footer">
+      {{ if (or .Truncated .Page.Params.description) }}
+      <a href='{{ .RelPermalink }}'>Read full article for "{{ if .Title }}{{ .Title }}{{ else }}{{ .File.TranslationBaseName | title }}{{ end }}"</a>
+      {{ end }}
+    </footer>
+   </section>
+    {{ end }}
+  {{ end }}
+{{ end }}

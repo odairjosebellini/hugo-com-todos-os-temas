@@ -1,0 +1,32 @@
+{{ define "main" }}
+<main id="home">
+    <div>
+        <div class="avatar">
+            <img src="https://www.gravatar.com/avatar/{{ md5 .Site.Params.gravatar.email }}?s=240&d=mp" alt="gravatar">
+        </div>
+        <div id="content">
+            {{ .Content }}
+            <div class="social-media">
+                {{ range sort .Site.Params.social "weight" }}
+                    <a class="link" href="{{ .url }}">
+                        {{ $path := printf "social-icons/%s.svg" .name }}
+                        {{ partial $path (dict "class" "social-media-icon") }}
+                    </a>
+                {{ end }}
+            </div>
+        </div>
+    </div>
+
+    <div id="recent-posts">
+        <h2>{{ i18n "recent_posts" }}</h2>
+        <ul>
+            {{ range first 5 (where .Site.RegularPages "Type" "in" .Site.Params.mainSections).ByPublishDate.Reverse }}
+                <li>
+                    <span>{{- partial "date.html" . -}}</span>
+                    <a href="{{ .Permalink }}">{{ .Title }}</a>
+                </li>
+            {{ end }}
+        </ul>
+    </div>
+</main>
+{{ end }}

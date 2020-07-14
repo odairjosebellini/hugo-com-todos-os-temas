@@ -1,0 +1,27 @@
+{{ define "title" }}
+  {{ if .Title }}{{ if .Data.Terms }}Taxonomy: {{ .Title }}{{ else }}{{ if .Data.Singular }}{{ .Data.Singular | humanize }}: {{ .Title | singularize | humanize }}{{ else }}{{ .Title }}{{ end }}{{ end }}{{ end }}
+{{ end }}
+{{ define "bodytag" }}
+  <body>
+<!-- Copyright 2018-2019 Daniel F. Dickinson
+     Released under the Create Commons BY (Attribution) 4.0 License -->
+{{ end }}
+{{ define "main" }}
+<main class="taxonomy-term-page-main">
+<article aria-label="Main Article" id="main-article" class="main-article">
+  {{ if .Title }}<h1 class="article-title">{{ if .Data.Terms }}Taxonomy: {{ .Title }}{{ else }}{{ if .Data.Singular }}{{ .Data.Singular | humanize }}: {{ .Title }}{{ else }}{{ .Title }}{{ end }}{{ end }}</h1>{{ end }}
+  <section class="taxonomy-term-content">
+  {{ .Content }}
+  {{ partial "generic-helpers/aside" . }}
+  </section>
+  {{ if .Data.Pages }}
+  <section aria-labelledby="taxonomy-term-heading" class="taxonomy-term-list">
+    <h2 id="section-contents-heading" class="taxonomy-term-heading">{{ if .Data.Terms }}{{ .Data.Singular | singularize | humanize }} List{{ else}}{{ .Title | singularize | humanize }} Pages{{ end }}</h2>
+    <ol class="taxonomy-term-contents">
+    {{ partial "generic-helpers/section/nesting" . }}
+    </ol>
+  </section>
+  {{ end }}
+</article>
+</main>
+{{ end }}

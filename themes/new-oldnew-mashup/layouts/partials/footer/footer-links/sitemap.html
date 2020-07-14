@@ -1,0 +1,4 @@
+{{- $footerPage := "/siteentry/sitemap" -}}
+{{- if .Param "footersection" -}}
+  {{- $footerPage = printf "/%s/sitemap" (.Param "footersection") -}}
+{{- end -}}{{- if .Site.GetPage $footerPage }}<span class="sitemap"><a href="{{ $footerPage | relURL }}" title="Site Map">Site Map</a></span>{{ end -}}

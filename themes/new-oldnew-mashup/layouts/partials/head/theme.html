@@ -1,0 +1,63 @@
+{{/* Copyright 2018 Daniel F. Dickinson, Released under the Creative
+  Commons 4.0 BY (Attribution) License */}}
+{{- block "metarender" . -}}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+{{- end -}}
+{{ block "metadata" . }}
+  {{ if (index .Params "categories") }}<meta name="keywords" content="{{ delimit (index .Params "categories") ", " }}">{{ end }}
+  {{ if (index .Params "description") }}<meta name="description" content="{{ index .Params "description" }}">{{ end }}
+  {{ if (index .Params "author") }}<meta name="author" content="{{ index .Params "author" }}">{{ end }}
+  {{ hugo.Generator }}
+{{- end -}}
+{{ block "links" . }}
+  {{ if ne (.Param "nobaseurl") true }}{{ if $.Site.BaseURL }}<base href="{{ $.Site.BaseURL }}">{{ end }}{{ end }}
+  {{- $nb := resources.Get "css/new-base.scss" -}}
+  {{- $nmfile := resources.Get "css/normalize/normalize.css" -}}
+  {{- if not (and $nmfile $nb) -}}
+    {{- errorf "Missing static SCSS resources" -}}
+  {{- end -}}
+  {{- $options := (dict "enableSourceMap" true "compress" true "targetPath" "css/scss-oldnew-mashup.css" "includePaths" (slice "assets/scss/oldnew")) -}}
+  {{- $gsvresname := "css/oldnew-vars.scss" -}}
+  {{- $gsv := resources.Get $gsvresname -}}
+  {{- if not $gsv -}}
+    {{- errorf "Missing SCSS style scheme resources" -}}
+  {{- end -}}
+  {{- $csstofingerprint := (slice ($nmfile | resources.Minify)) -}}
+  {{- $nbtplname := printf "css/hugo-%s-scheme.scss" "base" -}}
+  {{- $nbtpl := $gsv | resources.ExecuteAsTemplate $nbtplname . -}}
+  {{- $nbtplcatname := printf "css/%s-oldnew-mashup.scss" "cat" -}}
+  {{- $nbtplcat := slice $nbtpl $nb | resources.Concat $nbtplcatname -}}
+  {{- if or (or ( eq (string hugo.Environment) "for-basic" ) $.Site.IsServer ) ( eq (string hugo.Environment) "development" ) -}}
+    {{- $nm := $nmfile | resources.Minify -}}
+    {{- $nbcssstyle := $nbtplcat | resources.ToCSS $options -}}
+     <link rel="stylesheet" href="{{ $nm.Permalink }}"/>
+     <link rel="stylesheet" href="{{ $nbcssstyle.Permalink }}"/>
+  {{ else }}
+    {{- $nm := $nmfile | resources.Minify | resources.Fingerprint -}}
+    {{- $nbcssstyle := $nbtplcat | resources.ToCSS $options | resources.Fingerprint -}}
+     <link rel="stylesheet" href="{{ $nm.Permalink }}"/>
+     <link rel="stylesheet" href="{{ $nbcssstyle.Permalink }}"/>
+  {{- end -}}
+{{- end }}
+{{ block "output-formats" . }}
+  {{ range .AlternativeOutputFormats }}
+    {{- printf `<link rel="%s" type="%s" href="%s" title="%s %s" />` .Rel .MediaType.Type .Permalink $.Site.Title (upper .MediaType.SubType) | safeHTML }}
+  {{ end -}}
+{{- end -}}
+{{- block "scripts" . -}}
+  {{- $fusejs := resources.Get "js/krisk-Fuse/dist/fuse.js" -}}
+  {{- $fusebar := resources.Get "js/fusebar/dist/fusebar.dev.js" -}}
+  {{- $confirmation := resources.Get "js/confirmation.js" -}}
+  {{- if ne (string hugo.Environment) "development" -}}
+    {{- $fusejs = resources.Get "js/krisk-Fuse/dist/fuse.js" | resources.Minify | resources.Fingerprint -}}
+    {{- $fusebar = resources.Get "js/fusebar/dist/fusebar.js" | resources.Minify | resources.Fingerprint -}}
+    {{- $confirmation = resources.Get "js/confirmation.js" | resources.Minify | resources.Fingerprint -}}
+  {{- end -}}
+  <script src="{{ $fusejs.RelPermalink }}"></script>
+  <script>
+    var indexurl = {{ "index.json" | absURL }}
+  </script>
+  <script src="{{ $fusebar.RelPermalink }}"></script>
+  <script src="{{ $confirmation.RelPermalink }}"></script>
+{{- end }}

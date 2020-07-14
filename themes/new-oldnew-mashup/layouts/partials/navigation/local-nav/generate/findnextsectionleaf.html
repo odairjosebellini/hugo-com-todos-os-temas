@@ -1,0 +1,20 @@
+{{- $curCtx := . -}}
+{{/* find whether we're a leaf section */}}
+{{- $nextNodes := ( partial "generic-site-menu/nodes-included" ( dict "nodes" .menu_node.Pages "menu_node" .menu_node "menu_type" "local-nav" ) ) -}}
+
+{{- if $nextNodes -}}
+  {{- if (first 1 $nextNodes) -}}
+    {{/*We have children so go down one level*/}}
+    {{- range (first 1 $nextNodes) -}}
+      {{- if .RelPermalink -}}<a href="{{- .RelPermalink -}}">Next</a>{{- end -}}
+    {{- end -}}
+  {{- else -}}
+    {{/*We don't actually have children*/}}
+    {{/*Go up a level and try again*/}}
+    {{- partial "navigation/local-nav/generate/nextrecurse" ( dict "cur_node" $curCtx.cur_node "menu_node" $curCtx.menu_node.Parent "no_down" true ) -}}
+  {{- end -}}
+{{- else -}}
+  {{/*No children so we are a leaf*/}}
+  {{/*Go up a level and try again*/}}
+  {{- partial "navigation/local-nav/generate/nextrecurse" ( dict "cur_node" $curCtx.cur_node "menu_node" $curCtx.menu_node.Parent "no_down" true ) -}}
+{{- end -}}

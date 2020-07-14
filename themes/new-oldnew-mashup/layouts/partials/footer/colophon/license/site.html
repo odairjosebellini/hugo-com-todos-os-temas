@@ -1,0 +1,10 @@
+{{- $licenses := default ( slice "Proprietary" ) $.Site.Params.licenses -}}
+<ul class="license-list">
+  <!-- Copyright 2018-2019 Daniel F. Dickinson,
+       Released under the Creative Commons 4.0 BY (Attribution) License -->
+   {{- range $licenses }}
+    {{- $license_name := lower . -}}
+    {{- $file := printf "/licenses/%s/" $license_name -}}
+      <li class="license-item"><a href="{{ $file | relURL }}">{{ . }}</a></li>
+  {{ end -}}
+</ul>

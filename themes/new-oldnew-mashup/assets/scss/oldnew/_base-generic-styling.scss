@@ -1,0 +1,142 @@
+/*! Copyright 2007-2009,2017-2018 Daniel F. Dickinson <cshored@thecshore.com>
+ *  Released under the Creative Commons BY (Attribution) 4.0 License
+ */
+
+// The C Shore Generic Styling Elements
+
+// When not using Flex, use this to force following HTML to be rendered
+// below the current element
+.clear {
+  &::after {
+    clear: both;
+    content: '';
+    display: block;
+  }
+}
+
+.label {
+  font-weight: bold;
+}
+
+// rises from bottom of viewport
+.rollup-element {
+  bottom: 33%;
+  display: none;
+  left: 33%;
+  overflow: auto;
+  position: fixed;
+  z-index: 99999;
+}
+
+// must be immediately above rollup-element block
+.rollup-hoversite {
+  &:Active + .rollup-element,
+  &:Hover + .rollup-element {
+    display: block;
+    opacity: 1;
+  }
+}
+
+// Defines semi-block style paragraphs (initial indent)
+// For the rare case where you need paragraphs with initial indent
+.semiblockwrapper {
+  & p {
+    &::before {
+      text-indent: 5%;
+    }
+  }
+}
+
+.semiblock {
+  &::before {
+    text-indent: 5%;
+  }
+}
+
+.start-para-pic {
+  display: inline-block;
+  float: left;
+}
+
+@mixin inline-image-href {
+  & a {
+    border: 0;
+    display: block;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+
+    & img {
+      border: 0 none;
+      display: block;
+      height: auto;
+      margin: 0;
+      max-width: 100%;
+      min-width: 150px;
+      padding: 0;
+      width: 800px;
+    }
+
+    & figcaption {
+      display: none;
+    }
+  }
+}
+
+.four-image-toc-row ~ figure {
+  @include inline-image-href
+
+  display: inline-block;
+  line-height: 1;
+  margin: .2em;
+  max-width: 30%;
+  min-width: 150px;
+  padding: 0;
+}
+
+.four-image-toc-row ~ figure + a {
+  display: none;
+}
+
+.four-image-toc-row ~ figure + a + p {
+  display: none;
+}
+
+.four-image-toc-row ~ figure + a + p + p {
+  display: none;
+}
+
+// @-ms-viewport { // sass-lint:disable-line no-vendor-prefixes
+//   width: device-width;
+// }
+
+// Setting for printing only
+// Don't print navigation items hidden on most browsers
+@media print {
+  // Do print full footer
+  .rollup-element {
+    display: block;
+    position: static;
+    z-index: 0;
+  }
+
+  .rollup-hoversite {
+    display: none;
+    position: static;
+  }
+
+  .homepage {
+    height: initial;
+    position: static;
+
+    & .topbar {
+      height: initial;
+      position: static;
+    }
+
+    & .footer {
+      height: initial;
+      position: static;
+    }
+  }
+}

@@ -1,0 +1,36 @@
+baseURL = "https://example.org/"
+languageCode = "en-us"
+title = "A Hugo theme"
+theme = "techlog-simple"
+defaultContentLanguage = "en"
+# defaultContentLanguage = "ja"
+hasCJKLanguage = true
+enableEmoji = true
+pygmentsCodeFences = true
+pygmentsStyle = "friendly"
+enableGitInfo = false
+enableRobotsTXT = true
+# googleAnalytics = "UA-00000000-1"
+
+[params]
+description = "A simple Hugo theme for tech blogs :)"
+
+[params.sns]
+github = "mazgi"
+twitter = "mazgi"
+instagram = "mazgi"
+# facebook = ""
+
+[taxonomies]
+category = "categories"
+tag = "tags"
+author = "authors"
+
+[languages]
+[languages.en]
+weight = 1
+languageName = "English"
+
+[languages.ja]
+weight = 10
+languageName = "日本語"

@@ -1,0 +1,1 @@
+<span class="page-taxonomy page-{{ .taxonomyType }}"><a class="page-{{ .taxonomyType }}-{{ .taxonomyTerm | urlize }}" href="{{ (printf "%s/%s" ( .taxonomyType | pluralize ) .taxonomyTerm ) | urlize | relLangURL }}">{{ .taxonomyTerm }}</a></span>

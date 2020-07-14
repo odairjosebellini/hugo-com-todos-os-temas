@@ -1,0 +1,17 @@
+{{ define "main" }}
+  {{ $pages := .Pages }}
+  {{ $paginator := .Paginate $pages }}
+
+  <div class="p-archive">
+    <div class="c-container">
+      <ul class="c-archive-list">
+      {{ range $pages }}
+        {{ .Render "li" }}
+      {{ end }}
+      </ul>
+
+      {{ partial "pagenation.html" . }}
+    </div>
+  </div>
+
+{{ end }}

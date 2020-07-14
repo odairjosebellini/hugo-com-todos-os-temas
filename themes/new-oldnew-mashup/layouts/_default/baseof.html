@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{{/* Copyright 2018 Daniel F. Dickinson <cshored@thecshore.com>
+     Released under the Create Commons BY (Attribution) 4.0 License */}}
+<html lang="{{ $.Site.Language.Lang }}">
+<head>
+  <title>{{- block "title" . -}}
+    {{- if .Title -}}{{- .Title -}}{{- else if .Name -}}{{- .Name -}}{{- else -}}{{- .Site.Title -}}{{ end -}}
+  {{- end -}}
+  </title>
+  {{ block "head" . -}}
+     {{ partial "head/theme" . -}}
+     {{- partial "head/site" . -}}
+  {{- end -}}
+</head>
+  {{- block "bodytag" . }}
+<body>
+  {{- end -}}
+  {{- block "header" . }}
+  <div class="default-body-wrapper">
+      {{- partial "page-header" . -}}
+  {{- end -}}
+  {{- block "navigation" . -}}
+    {{- if not (or .Params.nornav .Site.Params.nornav) -}}
+      {{ partial "navigation/local-nav/bar" .Page }}
+    {{- end -}}
+    {{- if not (or .Params.normenu .Site.Params.normenu) -}}
+      {{ partial "navigation/menu" . }}
+    {{- end -}}
+  {{- end -}}
+  {{- block "main" . -}}
+      <main class="main">
+      <article aria-label="Main Article" id="main-article" class="main-article">
+    {{ partial "generic-helpers/article-header" . }}
+    {{- if (not (or .Data.Terms .Data.Singular ) ) -}}
+    {{- partial "generic-helpers/article-toc" . -}}
+    {{- end -}}
+    {{- replaceRE "<h1.*</h1>" "" .Content | safeHTML -}}
+    {{- partial "generic-helpers/aside" . -}}
+    {{- block "tags-list" . -}}
+      {{ partial "generic-helpers/taxonomy/taxonomy-list" (dict "curRegPage" . "taxonomyType" "tag" ) }}
+    {{- end -}}
+      </article>
+    {{- block "main-footer" . -}}
+    {{- end -}}
+      </main>
+  {{- end -}}
+  {{ block "sidebar" . }}
+    {{ partial "sidebar" . }}
+  {{ end }}
+  {{ block "footer" . }}
+    {{ partial "footer" . }}
+  {{- end -}}
+  </div>
+</body>
+</html>

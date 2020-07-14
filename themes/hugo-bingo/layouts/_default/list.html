@@ -1,0 +1,13 @@
+{{ define "main" }}
+<main id="list">
+    <h1>{{ .Title }}</h1>
+    <ul>
+        {{ range .Site.RegularPages }}
+        <li>
+            <a href="{{ .Permalink }}">{{ .Title }}</a>
+            <p>{{- partial "date.html" . -}}</p>
+        </li>
+        {{ end }}
+    </ul>
+</main>
+{{ end }}

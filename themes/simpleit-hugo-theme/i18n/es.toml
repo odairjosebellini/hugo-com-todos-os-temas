@@ -1,0 +1,54 @@
+[about]
+other = "Acerca"
+
+[articles]
+other = "Artículos"
+
+[buy_me_a_coffee]
+other = "Cómprame un café"
+
+[helpful]
+other = "Útil?"
+
+[home-leadtext]
+other = '<p><strong>Este es un sitio de ejemplo</strong> para mostrar cómo funciona este tema <i class="fas fa-briefcase" aria-hidden="true"></i>.</p>'
+
+[image]
+other = "Imagen:"
+
+[kofi]
+other = "Cómprame un café en ko-fi.com"
+
+[last-modified]
+other = "Última modificación:"
+
+[latest-articles]
+other = "Últimos artículos"
+
+[license]
+other = "Licencia:"
+
+[made-by]
+other = "Hecho por"
+
+[published]
+other = "Publicado:"
+
+[share]
+other = "Compartir?"
+
+[subcategories]
+other = "Subcategorías"
+
+[taxonomies]
+other = "Categorías"
+
+[tag]
+one = "Tag"
+other = "Tags"
+
+[translations]
+other = "Traducciones"
+
+[twitter-follow-us]
+other = "Síguenos!"

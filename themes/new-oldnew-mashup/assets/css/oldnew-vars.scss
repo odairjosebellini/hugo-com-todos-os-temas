@@ -1,0 +1,89 @@
+$serif-font-stack: {{ default "('Georgia', 'serif')" ( .Param "serif_stack" ) }};
+$sans-font-stack: {{ default "('Lucida Sans Unicode', 'Lucida Granda', 'sans-serif')" ( .Param "sans_font_stack" ) }};
+$mono-font-stack: {{ default "('Lucida Console', 'Monaco', 'monospace')" ( .Param "mono_font_stack" ) }};
+
+$default-background-color: {{ default "#333" ( .Param "default_background_color" ) }};
+{{ if .Param "default_background_image" }}$default-background-image: {{ .Param "default_background_image" }};{{ else  }}$default-background-image: '';{{ end }}
+$default-text-color: {{ default "#eee" ( .Param "default_text_color" ) }};
+$default-link-color: {{ default "#ccf" ( .Param "default_link_color" ) }};
+$default-visited-link-color: {{ default "#cde" ( .Param "default_visited_link_color" ) }};
+$default-hover-background-color: {{ default "#777" ( .Param "default_hover_background_color" ) }};
+$default-hover-color: {{ default "#f00" ( .Param "default_hover_color" ) }};
+
+$default-pre-background-color: {{ default "#000" ( .Param "default_pre_background_color" ) }};
+$default-pre-text-color: {{ default "#aaa" (.Param "default_pre_text_color" ) }};
+$default-pre-link-color: {{ default "#999" ( .Param "default_pre_link_color" ) }};
+$default-pre-visited-color: {{ default "$default-visited-link-color" ( .Param "default_pre_visited_color" ) }};
+$default-pre-hover-color: {{ default "#fff" ( .Param "default_pre_hover_color" ) }};
+
+$default-inline-pre-background-color: {{ default "#bbb" ( .Param "default_pre_inline_background_color" ) }};
+$default-inline-pre-text-color: {{ default "#000" (.Param "default_pre_inline_text_color" ) }};
+$default-inline-pre-link-color: {{ default "#222" ( .Param "default_pre_inline_link_color" ) }};
+$default-inline-pre-visited-color: {{ default "#111" ( .Param "default_pre_inline_visited_color" ) }};
+$default-inline-pre-hover-color: {{ default "#fff" ( .Param "default_pre_inline_hover_color" ) }};
+
+$default-separator-color: {{ default "#909090" ( .Param "default_separator_color" ) }};
+
+$default-container-border: {{ default "4px solid" ( .Param "default_container_border" ) }};
+$default-container-border-color: {{ default "#ccc" ( .Param "default_container_border_color" ) }};
+$default-container-background-color: {{ default "#222" ( .Param "default_container_background_color" ) }};
+$default-container-text-color: {{ default "#ccc" (.Param "default_container_text_color") }};
+$default-container-row-background-color: {{ default "#000" (.Param "default_container_row_background_color") }};
+
+$sidebar-box-border: {{ default "2px solid" ( .Param "sidebar_box_border" ) }};
+$sidebar-box-border-color: {{ default "$default-container-border-color" ( .Param "sidebar_box_border_color" ) }};
+$sidebar-box-background-color: {{ default "$default-container-background-color" ( .Param "sidebar_box_background_color" ) }};
+$sidebar-box-text-color: {{ default "$default-container-text-color" ( .Param "sidebar_box_text_color" ) }};
+$sidebar-box-row-background-color: {{ default "$default-container-row-background-color" (.Param "sidebar_box_row_background_color") }};
+
+$sidebar-menu-entry-row-background-color: {{ default "$sidebar-box-row-background-color" (.Param "sidebar_menu_entry_row_background_color") }};
+
+$toc-box-border: {{ default "2px dotted" ( .Param "sidebar_box_border" ) }};
+$toc-box-border-color: {{ default "#666" ( .Param "toc_box_border_color" ) }};
+$toc-box-background-color: {{ default "#444" ( .Param "toc_box_background_color" ) }};
+$toc-box-text-color: {{ default "#ddd" ( .Param "toc_box_text_color" ) }};
+$toc-box-row-background-color: {{ default "#222" (.Param "toc_box_row_background_color") }};
+
+$doc-date-border: {{ default "$default-container-border" ( .Param "doc_date_border" ) }};
+$doc-date-border-color: {{ default "$default-container-border-color" ( .Param "doc_date_border_color" ) }};
+$doc-date-background-color: {{ default "$default-container-background-color" ( .Param "doc_date_background_color" ) }};
+$doc-date-text-color: {{ default "$default-container-text-color" ( .Param "doc_date_text_color" ) }};
+
+$default-top-bar-background-color: {{ default "$default-background-color" ( .Param "default_top_bar_background_color" ) }};
+$default-top-bar-box-shadow-color: {{ default "#000" ( .Param "default_top_bar_box_shadow_color") }};
+$default-top-bar-border-color: {{ default "#222" ( .Param "default_top_bar_border_color") }};
+$default-top-bar-hover-border-color: {{ default "#000"  ( .Param "default_top_bar_hover_border_color") }};
+$default-top-bar-hover-box-shadow-color: {{ default "#555"  ( .Param "default_top_bar_hover_box_shadow_color") }};
+
+$site-badge-graphic-background-color: {{ default "$default-inline-pre-background-color" ( .Param "$site_badge_graphic_background_color") }};
+
+$menubar-box-shadow-color: {{ default "$default-top-bar-box-shadow-color" ( .Param "menubar_box_shadow_color") }};
+$menubar-top-level-border-color: {{ default "$default-top-bar-border-color" ( .Param "menubar_top_level_border_color") }};
+$menubar-submenu-background-color: {{ default "$default-container-background-color" ( .Param "menubar_submenu_background_color" ) }};
+
+$local-nav-background-color: {{ default "#bbb" ( .Param "local_nav_background_color" ) }};
+$local-nav-text-color: {{ default "#000" (.Param "local_nav_text_color" ) }};
+$local-nav-link-color: {{ default "#222" ( .Param "local_nav_link_color" ) }};
+$local-nav-hover-background-color: {{ default "#ddd" ( .Param "local_nav_hover_background_color" ) }};
+$local-nav-hover-color: {{ default "#222" ( .Param "local_nav_hover_color" ) }};
+
+$homepage-title-background-color: {{ default "#777" ( .Param "homepage_title_background_color" ) }};
+$homepage-title-text-color: {{ default "#fff" ( .Param "homepage_title_text_color" ) }};
+
+$splash-screenshot-frame-border: {{ default "20px solid #fff" ( .Param "splash_screenshot_frame_border" ) }};
+$splash-screenshot-image-border: {{ default "2px solid #202020" ( .Param "splash_screenshot_image_border" ) }};
+$splash-screenshot-outside-border: {{ default "2px solid #202020" ( .Param "splash_screenshot_outside_border" ) }};
+$splash-screenshot-box-shadow: {{ default "6px 6px 6px #000" ( .Param "splash_screenshot_box_shadow" ) }};
+
+$search-results-background-color: {{ default "$default-inline-pre-background-color" ( .Param "search_results_background_color" ) }};
+$search-results-text-color: {{ default "$default-inline-pre-text-color" (.Param "search_results_text_color" ) }};
+$search-results-link-color: {{ default "$default-inline-pre-link-color" ( .Param "search_results_link_color" ) }};
+$search-results-visited-color: {{ default "$default-inline-pre-visited-color" ( .Param "search_results_visited_color" ) }};
+$search-results-hover-color: {{ default "$default-inline-pre-hover-color" ( .Param "search_results_hover_color" ) }};
+
+$default-table-border: {{ default "$default-container-border" ( .Param "default_table_border" ) }};
+$default-table-border-color: {{ default "$default-container-border-color" ( .Param "default_table_border_color" ) }};
+$default-table-background-color: {{ default "#333" ( .Param "default_table_background_color" ) }};
+$default-table-text-color: {{ default "$default-container-text-color" ( .Param "default_table_text_color" ) }};
+$default-table-even-row-background-color: {{ default "#111" ( .Param "default_table_even_row_background_color" ) }};
+$default-table-heading-background-colour: {{ default "$default-pre-background-color" ( .Param "default_table_heading_background_color" ) }};

@@ -1,0 +1,192 @@
+@import 'vars';
+@import 'base';
+
+.pagination ul,
+.list {
+    list-style-type: none;
+    margin         : 0 auto;
+    padding        : 0;
+}
+
+body {
+    color : $text;
+    width : 80vw;
+    margin: 0 auto;
+}
+
+.list {
+    min-height : 80vh;
+    margin     : 0 auto 1rem auto;
+    background : $border url('../images/greenbox.jpg') no-repeat top / cover content-box content-box;
+    perspective: calc(100vw + 100vh);
+
+    li {
+        padding   : 1em 0;
+        position  : relative;
+        box-sizing: border-box;
+
+        &:first-child {
+            padding-top: 0;
+        }
+    }
+
+    span {
+        position: absolute;
+        left    : -3.5em;
+    }
+
+    a {
+        color          : $text;
+        background     : #FFF;
+        width          : 100%;
+        display        : block;
+        text-decoration: none;
+        overflow       : hidden;
+        text-overflow  : ellipsis;
+        white-space    : nowrap;
+        transform      : rotate(0deg) skew(0deg);
+    }
+
+    li:hover a {
+        transform : rotate(5deg) skew(20deg);
+        transition: transform .5s ease 0s;
+        animation : slide 15s ease .5s 1 normal forwards running;
+        box-shadow: 0.3rem 0.3rem 0rem 0rem $primary;
+    }
+
+    a:active {
+        outline: none;
+    }
+
+    span,
+    a {
+        vertical-align: super;
+        line-height   : 2em;
+
+    }
+}
+
+@keyframes slide {
+    0% {
+        transform: rotate(5deg) skew(20deg) translateX(0rem);
+    }
+
+    100% {
+        transform: rotate(5deg) skew(20deg) translateX(-10rem);
+    }
+}
+
+.pagination {
+    a {
+        font-size  : 2rem;
+        color      : $primary;
+        line-height: 1;
+    }
+
+    ul {
+        display        : flex;
+        justify-content: flex-end;
+    }
+
+    li {
+        margin-left: 2rem;
+    }
+}
+
+.header {
+    margin         : 0 auto;
+    padding        : 1rem 0 0.5rem 0;
+    min-height     : 2rem;
+    display        : flex;
+    justify-content: space-between;
+
+    img {
+        max-width: 6rem;
+    }
+
+    .menu {
+        display: flex;
+
+        li {
+            margin-left: 1rem;
+        }
+
+        a {
+            color: $primary;
+        }
+    }
+}
+
+.footer {
+    text-align: center;
+    margin    : 0.5rem 0 0.5rem 0;
+
+    a {
+        text-decoration: none;
+        color          : $border;
+    }
+}
+
+.content {
+    min-height: 70vh;
+    color: $text;
+    .no-content {
+        width: 100%;
+        background: $primary url('../images/greenbox.jpg') no-repeat center / 100% content-box content-box;
+        color: #FFF;
+        font-size: 2rem;
+        line-height: 2;
+        text-align: center;
+        text-indent: -999vw;
+        height: 40vh;
+    }
+    h1.title {
+        a {
+            display: block;
+            background: #FFF;
+            color: $text;
+            border-bottom: none;
+        }
+    }
+    a {
+        color: $primary;
+    }
+    ul, ol, dl {
+        line-height: 2;
+    }
+    .meta {
+        border-bottom: 1px solid $border;
+        margin: 1.5rem 0;
+        font-style: italic;
+        display: flex;
+        justify-content: flow-end;
+        ul {
+            margin: 1rem 1rem 1rem 0;
+            line-height: initial;
+        }
+        li {
+            display: inline-block;
+            a {
+                line-height: normal;
+            }
+        }
+        p {
+            margin-right: 1rem;
+        }
+    }
+}
+
+code {
+    overflow   : auto;
+    font-size  : 0.8rem;
+    font-family: 'Fira Code', Inconsolata, 'Deja Vu Sans Mono', 'Source Code Pro', Consolas, monospace;
+    padding    : 0.2rem 0.6rem;
+}
+
+@media screen and (max-width: 600px) {
+    .content {
+        .meta {
+            display: block;
+        }
+    }
+}

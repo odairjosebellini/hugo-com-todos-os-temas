@@ -1,0 +1,33 @@
+{{ define "main" }}
+{{- $paginator := .Paginate (where site.RegularPages "Type" "in" site.Params.mainSections) 5 -}}
+{{- range $paginator.Pages -}}
+<article>
+  <header>
+    <h1>
+      <a href='{{ .Permalink }}'>
+        {{- .Title -}}
+      </a>
+      <time datetime='{{ .Date.Format "2006-01-02T15:04:05+01:00" }}'>
+      {{- .Date.Format "02/01/2006" -}}
+    </time>
+    </h1>
+    <div class='meta'>
+      {{- range .Params.categories -}}
+        <a class='categories' href='{{ "categories/" | relLangURL }}{{ . | urlize }}'>
+          {{- . -}}
+        </a>
+      {{- end -}}
+      {{- range .Params.tags -}}
+        <a class='tags' href='{{ "tags/" | relLangURL }}{{ . | urlize }}'>
+          {{- . -}}
+        </a>
+      {{- end -}}
+      </div>
+  </header>
+  {{ .Summary }}
+</article>
+{{- end -}}
+<nav id='index'>
+  <a href='{{ "posts/" | relLangURL }}'>{{ i18n "seeMorePosts" }}</a>
+</nav>
+{{ end }}

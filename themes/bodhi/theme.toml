@@ -1,0 +1,12 @@
+name = "Bodhi Theme"
+license = "MIT"
+licenselink = "https://github.com/rhnvrm/bodhi/blob/master/LICENSE"
+description = "A simple, minimal, personal website theme for Hugo."
+homepage = "https://rohanverma.net/projects/bodhi"
+tags = ["blog", "minimal", "simple", "personal", "google-analytics", "minimalist", "search"]
+features = []
+min_version = "0.70.0"
+
+[author]
+  name = "Rohan Verma"
+  homepage = "https://rohanverma.net"

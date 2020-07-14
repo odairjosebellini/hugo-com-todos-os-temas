@@ -1,0 +1,9 @@
+<div class="sitemap-main">
+<ul class="sitemap-main-list">
+  <!-- Copyright 2018-2019 Daniel F. Dickinson,
+       Released under the Creative Commons 4.0 BY (Attribution) License -->
+{{ $ctx := .Page }}
+{{ with $ctx }}
+  {{ partial "generic-site-menu/full-tree" ( dict "menu_node" . "menu_type" "sitemap" ) }}
+{{ end }}
+</ul></div>

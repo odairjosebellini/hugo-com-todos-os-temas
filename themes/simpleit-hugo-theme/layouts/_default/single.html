@@ -1,0 +1,44 @@
+{{ define "main" }}
+
+<div class="container-fluid mt-3">
+    <div class="row">
+
+	{{ partial "sidebar.html" . }}
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-9 px-4">
+            
+	    {{ partial "post_header.html" . }}
+
+	    {{ partial "single/precontent.html" . }}
+	    {{.Content}}
+	    {{ partial "single/postcontent.html" . }}
+
+	    {{ partial "author.html" . }}
+	    <div class="comments">
+		{{ template "_internal/disqus.html" . }}
+	    </div>
+
+	    {{ partial "prevnext_buttons" . }}
+
+	    <div class="top-border p-3 mb-2 bg-light">
+		{{ partial "sections-tree.html" . }}
+	    </div>
+	    
+	    {{ partial "breadcrumb.html" . }}
+
+	    <div class="mt-3">
+		{{- partial "footer.html" . -}}
+	    </div>
+	    
+        </main>
+    </div>
+</div>
+
+{{/* Load mermaid js library only if there is a mermaid block like */}}
+{{ if (in .RawContent "mermaid")}}
+<div class="mermaid">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.0.0-rc.8/mermaid.min.js"></script>
+</div>
+{{ end }}
+
+{{ end }}

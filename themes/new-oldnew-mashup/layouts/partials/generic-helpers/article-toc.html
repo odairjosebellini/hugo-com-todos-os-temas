@@ -1,0 +1,8 @@
+{{ if (and (and (ne (.Param "noptoc") true) .TableOfContents ) (not (eq (path.Base .File.Dir) "licenses" ) ) ) }}
+    {{ if ne  (trim .TableOfContents "\n") "<nav id=\"TableOfContents\"></nav>" }}
+  <section aria-labelledby="article-toc-title" class="article-toc toc-box">
+    <h2 id="article-toc-title">Table of Contents</h2>
+        {{ replace .TableOfContents `href="#` (printf `href="%s#` .Permalink) | safeHTML }}
+  </section>
+  {{ end }}
+{{ end }}

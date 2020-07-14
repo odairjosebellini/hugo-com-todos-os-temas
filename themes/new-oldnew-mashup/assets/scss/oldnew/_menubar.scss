@@ -1,0 +1,461 @@
+/*! Copyright 2007-2009,2017-2018 Daniel F. Dickinson <cshored@thecshore.com>
+ * Released under the Creative Commons BY (Attribution) 4.0 License
+ */
+
+// The C Shore Generic Styling Elements for the menubar
+
+// Remember, for the level of specificity last rule wins
+
+@mixin menubar-menu-entry-wrapper {
+  & > .menu-entry-wrapper {
+    border-radius: 12px;
+    width: 100%;
+
+    & > .menu-link {
+      border-radius: 12px;
+      padding: .4em;
+
+      & > .menu-entry {
+        border-radius: 12px;
+      }
+    }
+  }
+}
+
+@mixin menubar-search-form {
+  & form {
+    display: flex;
+    flex: 1 1 100%;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+
+    & input {
+      &[type='search'] {
+        display: inline-block;
+        flex: 1 2 2em;
+      }
+    }
+
+    & input {
+      &[type='submit'] {
+        display: inline-block;
+        flex: 0 1 1em;
+      }
+    }
+  }
+}
+
+@mixin flyout-menu-parent($initial-display, $on-display, $item-display, $initial-z-index, $position, $topbottom, $topvalue, $right) {
+  & > .menu-parent {
+    @include enable-z-index($initial-z-index, $topbottom);
+
+    #{$topbottom}: $topvalue;
+    background-color: $menubar-submenu-background-color;
+    border-radius: 12px;
+    display: $initial-display;
+    left: auto;
+    list-style: none inside;
+    margin: 0;
+    opacity: 1;
+    padding: 0;
+    position: $position;
+    right: $right;
+    width: 100%;
+
+    &:active,
+    &:hover {
+      border-radius: 12px;
+      box-shadow: none;
+    }
+
+    & > .menu-item {
+      @include menu-item-contents($item-display, $on-display, $initial-z-index) {
+        @include menubar-menu-entry-wrapper;
+
+        @content;
+      }
+    }
+  }
+}
+
+@mixin flyout-menu-parent-parent($initial-display, $on-display, $item-display, $initial-z-index, $topbottom, $position, $right) {
+  & > .menu-parent {
+    @include enable-z-index($initial-z-index, $topbottom);
+
+    background-color: $menubar-submenu-background-color;
+    border: 2px solid;
+    border-radius: 12px;
+    display: $initial-display;
+    left: auto;
+    list-style: none inside;
+    margin: 0;
+    opacity: 1;
+    padding: 0;
+    position: $position;
+    right: $right;
+    text-align: left;
+    top: 100%;
+    width: 100%;
+
+    & > .menu-item {
+      @include menu-item-contents($item-display, none, $initial-z-index) {
+        @include menubar-menu-entry-wrapper;
+        @include flyout-menu-parent(none, none, none, $initial-z-index, $position, top, 100%, $right) {
+          border-radius: 12px;
+          box-shadow: none;
+        }
+
+        border: 2px none;
+        border-radius: 12px;
+        box-shadow: none;
+        display: $initial-display;
+        left: auto;
+        list-style: none inside;
+        margin: 0;
+        opacity: 1;
+        padding: 0;
+        width: 100%;
+      }
+    }
+  }
+}
+
+.menubar-site-menu {
+  align-content: flex-start;
+  align-items: flex-start;
+  display: flex;
+  flex: 1 1 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: 0;
+  padding: 0;
+
+  .menu-link {
+    text-decoration: none;
+  }
+
+  & > .menubar-site-menu-list {
+    align-content: flex-start;
+    align-items: center;
+    display: flex;
+    flex: 1 1 100%;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    & > .menu-item {
+      @include menu-item-contents(block, none, 20) {
+        @include menubar-menu-entry-wrapper;
+        @include flyout-menu-parent-parent(none, block, inline-block, 20, top, relative, 0);
+
+        border: 2px none;
+        border-radius: 12px;
+        box-shadow: 4px 4px 4px $menubar-box-shadow-color;
+
+        flex: 1 1 100%;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+
+        &:hover,
+        &:active {
+          background-color: $default-hover-background-color;
+          border: 2px inset $default-top-bar-hover-border-color;
+          border-radius: 12px;
+          box-shadow: 4px 4px 4px $default-top-bar-hover-box-shadow-color inset;
+        }
+      }
+
+      background-color: $default-top-bar-background-color;
+      border: 2px solid $menubar-top-level-border-color;
+    }
+
+    & > .top-search {
+      @include menubar-search-form;
+
+      align-self: flex-end;
+      display: flex;
+      flex: 1 1 100%;
+      margin-left: 0;
+    }
+  }
+
+  & > .search-results {
+    background-color: $search-results-background-color;
+    bottom: 0;
+    color: $search-results-text-color;
+    display: none;
+    max-height: 80%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: fixed;
+    right: 0;
+    width: 100%;
+    z-index: 40;
+
+    & a {
+      background-color: $search-results-background-color;
+      color: $search-results-link-color;
+
+      &:link {
+        color: $search-results-link-color;
+      }
+
+      &:visited {
+        color: $search-results-visited-color;
+      }
+
+      &:active,
+      &:hover {
+        color: $search-results-hover-color;
+      }
+    }
+  }
+}
+
+@mixin menubar-active-menu-parent-active {
+  &:active,
+  &:hover {
+    border: solid 2px;
+  }
+}
+
+@mixin menubar-active-menu-item-parent($on-display) {
+  & > LI {
+    &:active,
+    &:hover {
+      border: 2px solid;
+
+      & > UL {
+        @include menubar-active-menu-parent-active;
+        border: 2px solid;
+        display: $on-display;
+      }
+    }
+  }
+}
+
+@mixin menubar-active-menu-parent($on-display) {
+  & > UL {
+    @include menubar-active-menu-item-parent($on-display);
+
+    display: $on-display;
+  }
+}
+
+.menubar-site-menu-list {
+  & > .menu-item {
+    &:active,
+    &:hover {
+      @include menubar-active-menu-parent(none);
+    }
+  }
+}
+
+@mixin large-screen-flyout-menu-parent($initial-display, $on-display, $item-display, $initial-z-index, $position, $topbottom, $topvalue, $right) {
+  & > .menu-parent {
+    @include enable-z-index($initial-z-index, $topbottom);
+
+    #{$topbottom}: $topvalue;
+    background-color: $menubar-submenu-background-color;
+    border-radius: 12px;
+    display: $initial-display;
+    left: auto;
+    list-style: none inside;
+    margin: 0;
+    opacity: 1;
+    padding: 0;
+    position: $position;
+    right: $right;
+    width: 100%;
+
+    &:active,
+    &:hover {
+      border-radius: 12px;
+      box-shadow: none;
+    }
+
+    & > .menu-item {
+      @include menu-item-contents($item-display, $on-display, $initial-z-index) {
+        @include large-screen-menubar-menu-entry-wrapper;
+
+        @content;
+      }
+    }
+  }
+}
+
+@mixin large-screen-flyout-menu-parent-parent($initial-display, $on-display, $item-display, $initial-z-index, $topbottom, $position, $right) {
+  & > .menu-parent {
+    @include enable-z-index($initial-z-index, $topbottom);
+
+    background-color: $menubar-submenu-background-color;
+    border: 2px solid;
+    border-radius: 12px;
+    display: $initial-display;
+    left: auto;
+    list-style: none inside;
+    margin: 0;
+    opacity: 1;
+    padding: 0;
+    position: $position;
+    right: $right;
+    text-align: left;
+    top: 100%;
+    width: 100%;
+
+    & > .menu-item {
+      @include menu-item-contents($item-display, $on-display, $initial-z-index) {
+        @include large-screen-menubar-menu-entry-wrapper;
+        @include large-screen-flyout-menu-parent($initial-display, $on-display, $item-display, $initial-z-index + 2, $position, top, 0, $right) {
+          border-radius: 12px;
+          box-shadow: none;
+        }
+
+        border: 2px none;
+        border-radius: 12px;
+        box-shadow: none;
+        display: $initial-display;
+        left: auto;
+        list-style: none inside;
+        margin: 0;
+        opacity: 1;
+        padding: 0;
+      }
+    }
+  }
+}
+
+@mixin large-screen-menubar-menu-entry-wrapper {
+  & > .menu-entry-wrapper {
+    border-radius: 12px;
+    max-width: 20em;
+    width: 100%;
+
+    & > .menu-link {
+      border-radius: 12px;
+      padding: .4em;
+
+      & > .menu-entry {
+        border-radius: 12px;
+      }
+    }
+  }
+}
+
+
+
+@mixin large-screen-menu-item-search {
+  & > .menu-item {
+    @include menu-item-contents(inline-block, block, 20) {
+      @include large-screen-menubar-menu-entry-wrapper;
+      @include flyout-menu-parent-parent(none, block, inline-block, 22, top, absolute, -75%);
+
+      flex: 0 2 7em;
+      margin: .2em;
+      text-align: center;
+    }
+  }
+
+  & > .top-search {
+    @include menubar-search-form;
+
+    align-self: center;
+    display: flex;
+    flex: 2 1 7em;
+    margin-left: .4em;
+  }
+}
+
+
+
+@media screen and (min-width: 32em) {
+  .menubar-site-menu {
+    @include enable-z-index(20, top);
+
+    align-content: stretch;
+    align-items: stretch;
+    align-self: stretch;
+    display: inline-flex;
+    flex: 2 1 60%;
+    flex-flow: row nowrap;
+    justify-content: stretch;
+    margin-left: 2em;
+
+    .menu-parent {
+      // sass-lint:disable nesting-depth
+      & .menu-item {
+        & .menu-parent {
+          &:nth-child(1n+2) {
+            display: none;
+
+            & .menu-item {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+
+    & > .menubar-site-menu-list {
+      @include large-screen-menu-item-search;
+
+      align-content: space-around;
+      align-items: center;
+      display: inline-flex;
+      flex: 1 1 100%;
+      flex-flow: row wrap;
+      justify-content: flex-start;
+      list-style: none;
+      margin-bottom: 0;
+      margin-left: .8em;
+      margin-right: 0;
+      margin-top: 0;
+      padding: 0;
+
+      & > .menu-item {
+        @include menu-item-contents(block, block, 20) {
+          @include large-screen-menubar-menu-entry-wrapper;
+          @include large-screen-flyout-menu-parent-parent(none, block, inline-block, 20, top, absolute, -75%);
+
+          & > .menu-parent {
+            overflow: visible;
+            width: 200%;
+          }
+        }
+      }
+    }
+  }
+}
+
+// sass-lint:disable no-vendor-prefixes
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .menu-link {
+    text-decoration: none;
+  }
+
+  .menubar-site-menu {
+    display: flex;
+    flex: 1 1 75%;
+    margin: 0;
+    order: 2;
+    padding: 0;
+
+    & > .menubar-site-menu-list {
+      display: flex;
+
+      & > .menu-item {
+        display: block;
+        width: 17%;
+      }
+
+      & > .top-search {
+        display: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="{{ $.Site.Language.Lang }}">
+<head>
+	<meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <title>{{ if .Title }} {{ .Title }} | {{ end }}{{ $.Site.Title }}</title>
+
+  {{ $themeScss := "scss/main.scss" }}
+  {{ $options := (dict "targetPath" "css/main.css" "outputStyle" "compressed") }}
+  {{ $themeCss := resources.Get $themeScss | resources.ExecuteAsTemplate $themeScss . | toCSS $options | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $themeCss.RelPermalink }}" integrity="{{ $themeCss.Data.Integrity }}" media="screen">
+
+  {{ block "header_scripts" . }}
+  <!-- Optional header scripts -->
+  {{ end }}
+
+  {{ block "header_styles" . }}
+  <!-- Optional header styles -->
+  {{ end }}
+</head>
+
+<body class="{{ if not .Site.Params.disable_image_filters }}image-filters-enabled{{ end }} archive">
+  <div id="page" class="site">
+    <a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+    <header id="masthead" class="site-header {{ if .Params.image }}featured-image{{ end }}">
+      <div class="site-branding-container">
+        {{ partial "header/site-branding" . }}
+      </div><!-- .layout-wrap -->
+
+      {{ block "entry_header" . }}
+        <!-- For single posts and pages, special treatment if there's a featured image -->
+      {{ end }}
+    </header><!-- #masthead -->
+
+    <div id="content" class="site-content">
+      <section id="primary" class="content-area">
+        <main id="main" class="site-main">
+          {{ block "main" . }}{{ end }}
+        </main>
+      </section>
+    </div>
+
+    {{ partial "footer" . }}
+    
+  </div>
+
+  {{ block "footer_scripts" . }}
+  <!-- Optional footer scripts. -->
+  {{ end }}
+  
+  {{ partial "google-analytics-async.html" . }}
+</body>
+</html>

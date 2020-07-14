@@ -1,0 +1,15 @@
+# theme.toml template for a Hugo theme
+# See https://github.com/spf13/hugoThemes#themetoml for an example
+
+name = "hugo-theme-cole"
+license = "MIT"
+licenselink = "https://github.com/jacobsun/hugo-theme-cole/blob/master/LICENSE"
+description = "a minimal hugo theme, simply list contents."
+homepage = "https://github.com/jacobsun/hugo-theme-cole"
+tags = ["minimal", "light", "simple"]
+features = ["disqus", "syntax highlighting"]
+min_version = 0.40
+
+[author]
+  name = "Jacob Sun"
+  homepage = "https://ziox.xyz/"

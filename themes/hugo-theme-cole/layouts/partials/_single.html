@@ -1,0 +1,36 @@
+<main class="content">
+    <h1 class="title"><a href='{{ .RelPermalink }}' class="btn">{{ .Title }}</a></h1>
+    <div class="content">
+        {{ if .Content }}
+        {{ .Content }}
+        {{ else }}
+        <p class="no-content">No content.</p>
+        {{ end }}
+    </div>
+    <div class="meta">
+        <p class="published-date">
+            Published at:                 <time datetime="{{ .Date.Format "2006.01.02" }}">{{ .Date.Format "2006.01.02" }}</time>
+        </p>
+        {{ with .Params.categories }}
+        <p>Categories</p>
+        <ul class="categories control">
+            {{ range . }}
+            <li>
+                <a href="{{ "categories" | absURL }}/{{ . | urlize }}/" class="btn">{{ . }}</a>
+            </li>
+            {{ end }}
+        </ul>
+        {{ end }}
+        {{ with .Params.tags }}
+        <p>Tags:</p>
+        <ul class="tags control">
+            {{ range . }}
+            <li>
+                <a href="{{ "tags" | absURL }}/{{ . | urlize }}/" class="btn">{{ . }}</a>
+            </li>
+            {{ end }}
+        </ul>
+        {{ end }}
+    </div>
+</main>
+{{ partial "comment.html" . }}

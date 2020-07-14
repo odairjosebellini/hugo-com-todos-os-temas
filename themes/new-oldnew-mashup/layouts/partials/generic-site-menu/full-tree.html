@@ -1,0 +1,21 @@
+{{- $curCtx := . -}}
+{{- with .menu_node -}}
+  {{- range ( partial "generic-site-menu/nodes-included" (dict "nodes" .Site.Home.Pages "menu_node" . "menu_type" $curCtx.menu_type ) ) -}}
+    {{- $max_rows_per_column := .Param "max_rows_per_column" | default 8 -}}
+    {{- $max_columns := .Param "max_columns" | default 3 -}}
+    {{- $max_items := mul $max_rows_per_column $max_columns }}
+        <li class="menu-item">
+    {{ partial "generic-site-menu/menu-item" ( dict "cur_node" $curCtx.menu_node "menu_node" . ) -}}
+    {{- if (eq .Kind "page" ) }}
+        </li>
+    {{- else if (eq .Kind "section" ) }}
+          <ul class="menu-parent{{ if gt (len .Data.Pages) 0 }} has-submenu{{ end }}{{ if gt (len .Data.Pages) $max_rows_per_column }} needs-columns{{ end }}{{ if gt (len .Data.Pages) $max_items }} needs-overflow{{ end }}">
+      {{ partial "generic-site-menu/menu-section" ( dict "cur_node" $curCtx.menu_node "menu_node" . "menu_type" $curCtx.menu_type ) -}}
+          </ul>
+        </li>
+    {{- else }}
+      {{/* unknown .Kind */}}
+        </li>
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

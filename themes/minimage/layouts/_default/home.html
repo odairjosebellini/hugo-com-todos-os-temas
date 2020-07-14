@@ -1,0 +1,16 @@
+{{ define "main" }}
+  {{ $pages := .Paginate (where .Site.RegularPages "Type" "in" .Site.Params.mainSections) 5 }}
+
+  <div class="p-archive">
+    <div class="c-container">
+      <ul class="c-archive-list">
+      {{ range $pages.Pages }}
+        {{ .Render "li" }}
+      {{ end }}
+      </ul>
+
+      {{ partial "pagenation.html" . }}
+    </div>
+  </div>
+
+{{ end }}

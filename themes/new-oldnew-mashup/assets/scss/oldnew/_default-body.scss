@@ -1,0 +1,405 @@
+/*! Copyright 2007-2009,2017-2018 Daniel F. Dickinson <cshored@thecshore.com>
+ *  Released under the Creative Commons BY (Attribution) 4.0 License
+ */
+
+// OldNew Mashup Theme Main Elements Stylesheet
+// Remember, for the level of specifity last rule wins
+
+.default-body-wrapper {
+  align-content: stretch;
+  align-items: flex-start;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  left: 0;
+  position: relative;
+  top: 0;
+  width: 100%;
+  z-index: 0;
+}
+
+.article-title {
+  border-bottom: 6px ridge;
+  border-top: 6px ridge;
+  display: block;
+  margin-bottom: .1em;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0;
+  padding: .2em;
+  width: 100%;
+}
+
+.main,
+.section-page-main,
+.taxonomy-term-page-main,
+.taxonomy-page-main {
+  display: block;
+  flex: 1 1 100%;
+  line-height: 1.5;
+  margin-bottom: 0;
+  margin-left: .4em;
+  margin-right: .4em;
+  margin-top: 0;
+  max-width: 100%;
+  order: 2;
+  overflow: hidden;
+  padding: 0;
+  text-align: left;
+}
+
+.toc-box {
+  background-color: $toc-box-background-color;
+  border: $toc-box-border $toc-box-border-color;
+  color: $toc-box-text-color;
+  display: block;
+  margin-bottom: .4em;
+  padding: .6em;
+  text-align: left;
+
+  & h2 {
+    border-bottom: 1px dashed;
+    font-family: $serif-font-stack;
+    font-size: 1.2em;
+  }
+
+  a {
+    &:link,
+    &:visited,
+    &:hover,
+    &:active {
+      color: $toc-box-text-color;
+    }
+  }
+}
+
+//*.section-toc {
+//  display: block;
+//  width: 100%;
+//}
+
+.main-content {
+  display: block;
+  max-width: 100%;
+  order: 2;
+}
+
+.main-body {
+  display: block;
+  flex: 1 4 50%;
+  max-width: 100%;
+  padding-left: .8em;
+  padding-right: .8em;
+
+}
+
+.tags-list {
+  text-align: center;
+  width: 100%;
+}
+
+@mixin license-pages {
+  & h2 {
+    flex: 1 1 100%;
+    order: 1;
+    text-align: center;
+  }
+
+  & .section-contents,
+  & .taxonomy-term-contents,
+  & .taxonomy-contents {
+    align-content: center;
+    align-items: center;
+    display: flex;
+    flex-flow: column nowrap;
+    width: 100%;
+
+    & ol {
+      flex: 0 1 60%;
+      order: 2;
+      text-align: left;
+    }
+  }
+}
+
+.license-pages-section {
+  @include license-pages;
+}
+
+.side-by-side {
+  display: inline-block;
+  margin-left: .1em;
+  margin-right: .3em;
+  padding-left: 0;
+  padding-right: 0;
+  width: 45%;
+}
+
+.sitemap-main {
+  & .menu-item {
+    & .menu-link {
+      display: block;
+    }
+  }
+}
+
+.summary {
+  font-style: italic;
+  font-weight: bold;
+  margin-bottom: .4em;
+}
+
+@mixin article-toc {
+  display: block;
+  font-size: .9em;
+  margin-right: .8em;
+  margin-top: .4em;
+  padding-right: .8em;
+  padding-top: 0;
+
+  & h2 {
+    margin: 0;
+    padding: 0;
+  }
+
+  & li {
+    display: block;
+
+    & a {
+      display: block;
+      padding: .2em;
+    }
+  }
+
+  & ul {
+    list-style: none;
+    list-style-position: outside;
+    margin: 0;
+    margin-bottom: .4em;
+    padding-left: .2em;
+
+    & ul {
+      padding-left: 1em;
+    }
+  }
+
+  & a {
+    text-decoration: none;
+  }
+}
+
+.article-toc {
+  @include article-toc;
+}
+
+@mixin regular-main {
+  .main-article,
+  .regular-content {
+
+    overflow: hidden;
+
+    & .sitemap-main {
+      & .menu-item {
+        // sass-lint:disable nesting-depth
+        display: list-item;
+
+        // sass-lint:disable nesting-depth
+        & .menu-entry-wrapper {
+          display: inline-block;
+        }
+      }
+    }
+
+    & .article-toc {
+      @include article-toc;
+    }
+
+    & > h2 {
+      margin-bottom: 0;
+      margin-top: 0;
+    }
+
+    & ul {
+      list-style-position: inside;
+      margin-left: .8em;
+      padding-left: .8em;
+
+      & ul {
+        margin-left: 0;
+        padding-left: .8em;
+      }
+
+      & li {
+        list-style-position: inside;
+
+        // sass-lint:disable nesting-depth
+        &::marker {
+          display: inline-block;
+        }
+
+        & p {
+          display: inline;
+        }
+      }
+    }
+
+    & ol {
+      margin-left: .8em;
+      padding-left: .8em;
+
+      & ol {
+        margin-left: 0;
+        padding-left: .8em;
+      }
+
+      & li {
+        list-style-position: inside;
+
+        // sass-lint:disable nesting-depth
+        &::marker {
+          display: inline-block;
+        }
+
+        & p {
+          display: inline;
+        }
+      }
+    }
+  }
+}
+
+@include regular-main;
+
+@media screen and (min-height: 28em) and (min-width: 32em) {
+  .default-body-wrapper {
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: 74% 25%;
+  }
+
+  .main,
+  .section-page-main,
+  .taxonomy-term-page-main,
+  .taxonomy-page-main {
+    grid-column-end: 1;
+    grid-column-start: 2;
+    grid-row-end: 6;
+    grid-row-start: 2;
+  }
+
+  .article-toc {
+    display: inline-block;
+    float: left;
+    margin-top: .4em;
+    padding-top: 0;
+    width: 33%;
+  }
+
+  .article-toc ~ ul {
+    &:first-of-type {
+      bottom: 0;
+      display: inline-block;
+      position: relative;
+      right: 0;
+      width: 63%;
+
+      & ul {
+        display: block;
+      }
+    }
+  }
+
+  .article-toc ~ h2 {
+    &:first-of-type {
+      bottom: 0;
+      display: inline-block;
+      position: relative;
+      right: 0;
+      width: 63%;
+    }
+  }
+
+  .article-toc ~ ol {
+    &:first-of-type {
+      bottom: 0;
+      display: inline-block;
+      position: relative;
+      right: 0;
+      width: 63%;
+
+      & ol {
+        display: block;
+      }
+    }
+  }
+
+  .article-toc ~ h2 ~ h2 {
+    ul {
+      &:first-of-type {
+        display: block;
+        overflow: hidden;
+        width: auto;
+      }
+    }
+
+    ol {
+      &:first-of-type {
+        display: block;
+        overflow: hidden;
+        width: auto;
+      }
+    }
+  }
+
+  .article-toc ~ h2 ~ h2 ~ ul {
+    &:first-of-type {
+      display: block;
+      overflow: hidden;
+      width: auto;
+    }
+  }
+
+  .article-toc ~ h2 ~ h2 ~ ol {
+    &:first-of-type {
+      display: block;
+      overflow: hidden;
+      width: auto;
+    }
+  }
+}
+
+// sass-lint:disable no-vendor-prefixes
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .default-body-wrapper {
+    align-content: stretch;
+    align-items: flex-start;
+    display: flex;
+    flex-flow: row wrap;
+    grid-auto-flow: initial;
+    grid-template-columns: initial;
+    justify-content: flex-start;
+    left: 0;
+    position: relative;
+    top: 0;
+    width: 100%;
+    z-index: 0;
+  }
+
+  .main,
+  .section-page-main,
+  .taxonomy-term-page-main,
+  .taxonomy-page-main {
+    display: block;
+    flex: 1 1 100%;
+    line-height: 1.5;
+    margin-bottom: 0;
+    margin-left: .4em;
+    margin-right: .4em;
+    margin-top: 0;
+    max-width: 75%;
+    order: 3;
+    overflow: hidden;
+    padding: 0;
+    text-align: left;
+  }
+}

@@ -1,0 +1,1 @@
+{{- if (and (.Param "site_badge_graphic") ( .Param "site_badge_graphic_alt_text" ) ) }}<div class="graphics-row"><div class="site-badge-graphic"><img class="site-badge-graphic" alt="{{ .Param "site_badge_graphic_alt_text" }}" src="{{ .Param "site_badge_graphic" | relURL }}" /></div></div>{{ end -}}

@@ -1,0 +1,9 @@
+<div id="footer" class="light small">
+© {{ dateFormat "2006" now }} - {{ .Site.Params.Author }}.
+{{ with .Site.Params.FooterMessage }}
+<br>
+{{ . }}
+<br>
+{{ end }}
+This page was generated using the <a href="https://github.com/rhnvrm/bodhi">Bodhi</a> theme for Hugo.
+</div>

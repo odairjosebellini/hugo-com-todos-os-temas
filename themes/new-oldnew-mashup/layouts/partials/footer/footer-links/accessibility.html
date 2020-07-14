@@ -1,0 +1,4 @@
+{{- $footerPage := "/siteentry/accessibility" -}}
+{{- if (.Param "footersection") -}}
+  {{ $footerPage = printf "/%s/accessibility" (.Param "footersection") -}}
+{{- end -}}{{- if .Site.GetPage $footerPage }}<span class="accessibility"><a href="{{ $footerPage | relURL }}" title="Accessibility Statement">Accessibility</a></span>{{ end -}}

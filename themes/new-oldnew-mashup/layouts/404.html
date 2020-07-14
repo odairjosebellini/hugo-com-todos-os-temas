@@ -1,0 +1,20 @@
+{{- define "title" -}}
+  404 Resource Not Found
+{{- end -}}
+{{- define "main" -}}
+   <main class="main four-oh-four">
+       <article aria-label="Main Article" id="main-article" class="main-article not-found-box">
+         <h1 class="title">404 Resource not found</h1>
+         <div class="not-found-block">
+           {{ print "It seems we can't find that for which you are looking... :disappointed:" | emojify | markdownify }}
+         </div>
+         <div class="search-to-find-block">Search using the search bar above</div>
+         <div class="browse-to-find-block">
+           {{ markdownify "Or you can try to [Browse to find it](/)" }}
+         </div>
+         <div class="sitemap-to-find-block">
+           {{ markdownify "Alternatively, you can [View the Sitemap](siteentry/sitemap)" }}
+         </div>
+       </article>
+   </main>
+{{- end -}}

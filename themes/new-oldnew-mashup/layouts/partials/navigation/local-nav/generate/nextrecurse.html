@@ -1,0 +1,53 @@
+{{- $curCtx := . -}}
+{{- $foundNext := false -}}
+{{- $foundPage := false -}}
+{{- $curPage := false -}}
+{{- $nextPage := false -}}
+{{- $curNode := false -}}
+{{/* find whether we're a leaf section */}}
+{{- $nextNodes := ( partial "generic-site-menu/nodes-included" ( dict "nodes" .menu_node.Pages "menu_node" .menu_node "menu_type" "local-nav" ) ) -}}
+
+{{- if and $nextNodes ( ne $curCtx.no_down true ) -}}
+  {{/*We're a parent, go down, not sideways*/}}
+  {{- partial "navigation/local-nav/generate/findnextsectionleaf" ( dict "cur_node" $curCtx.cur_node "menu_node" .menu_node ) -}}
+{{- else if .menu_node.Parent -}}
+  {{- $nextNodes = ( partial "generic-site-menu/nodes-included" ( dict "nodes" .menu_node.Parent.Pages "menu_node" .menu_node "menu_type" "local-nav" ) ) -}}
+  {{- $curNode = .menu_node -}}
+
+  {{- if $nextNodes -}}
+    {{- range $nextNodes -}}
+      {{- if not $nextPage -}}
+        {{- $curPage = . -}}
+      {{- end -}}
+      {{- if $foundPage -}}
+        {{- $nextPage = $curPage -}}
+      {{- end -}}
+      {{- if eq $curPage $curNode -}}
+        {{- $foundPage = true -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- if $foundPage -}}
+    {{/*We at least found ourselves*/}}
+    {{- if $nextPage -}}
+      {{/*We also found a next page so use it*/}}
+      {{- if $nextPage.RelPermalink -}}<a href="{{- $nextPage.RelPermalink -}}">Next</a>{{- end -}}
+    {{- else -}}
+      {{- if $curCtx.menu_node.Parent -}}
+        {{/*We must be the last page here, go up a level and try again*/}}
+        {{- partial "navigation/local-nav/generate/nextrecurse" (dict "cur_node" $curCtx.cur_node "menu_node" $curCtx.menu_node.Parent "no_down" true) -}}
+      {{- else -}}
+        {{/* No parent so nowhere to go */}}
+        <span>Next</span>
+      {{- end -}}
+    {{- end -}}
+  {{- else -}}
+    {{/*No next page this level so go up a level and try again*/}}
+    {{- partial "navigation/local-nav/generate/nextrecurse" (dict "cur_node" $curCtx.cur_node "menu_node" $curCtx.menu_node.Parent "no_down" true) -}}
+  {{- end -}}
+
+{{- else -}}
+  {{/* No parent so nowhere to go */}}
+  <span>Next</span>
+{{- end -}}

@@ -1,0 +1,252 @@
+#all { // sass-lint:disable-line no-ids
+  background-color: $default-background-color;
+}
+
+body {
+  // People seem to like sans-serif better than serif
+  // so use a good looking default
+  background-color: $default-background-color;
+  @if($default-background-image) {
+    background-image: url($default-background-image);
+  }
+  color: $default-text-color;
+  font-family: $sans-font-stack;
+}
+
+// PRE is block-level so can safely be done as a box, others may be inline
+pre,
+samp {
+  border: dashed 1px;
+  font-family: $mono-font-stack;
+}
+
+kbd,
+var,
+code {
+  font-family: $mono-font-stack;
+}
+
+abbr,
+dfn {
+  border-bottom: 1px dotted;
+  cursor: help;
+}
+
+pre {
+  background-color: $default-pre-background-color;
+  color: $default-pre-text-color;
+  display: block;
+  overflow: hidden;
+  padding-bottom: 12px;
+
+  & a {
+    color: $default-pre-text-color;
+
+    &:link {
+      color: $default-pre-link-color;
+    }
+
+    &:visited {
+      color: $default-pre-visited-color;
+    }
+
+    &:active,
+    &:hover {
+      color: $default-pre-hover-color;
+    }
+  }
+
+  &:active,
+  &:hover {
+    overflow-x: scroll;
+    padding-bottom: 0;
+  }
+}
+
+code,
+samp,
+var,
+kbd {
+  background-color: $default-inline-pre-background-color;
+  color: $default-inline-pre-text-color;
+
+  & a {
+    color: $default-inline-pre-text-color;
+
+    &:link {
+      color: $default-inline-pre-link-color;
+    }
+
+    &:visited {
+      color: $default-inline-pre-visited-color;
+    }
+
+    &:active,
+    &:hover {
+      color: $default-inline-pre-hover-color;
+    }
+  }
+}
+
+ul {
+  list-style-position: inside;
+
+  & li {
+    padding-bottom: 3px;
+
+    &:last-child {
+      padding-bottom: 0;
+    }
+  }
+}
+
+html {
+  font-size: 16px;
+}
+
+label,
+.label {
+  font-weight: bold;
+}
+
+figure {
+  display: inline-block;
+}
+
+code,
+var,
+samp {
+  width: 100%;
+}
+
+// Change the colour links to match our colour scheme
+a {
+  // anchors default to regular text colour
+  color: $default-text-color;
+
+  &:link {
+    color: $default-link-color;
+  }
+
+  &:visited {
+    color: $default-visited-link-color;
+  }
+
+  &:active,
+  &:hover {
+    background-color: $default-hover-background-color;
+    color: $default-hover-color;
+  }
+}
+
+h1 {
+  display: none;
+  font-family: $serif-font-stack;
+  text-align: center;
+
+  &.page-title {
+    display: block;
+    font-family: $serif-font-stack;
+    text-align: center;
+  }
+}
+
+.article-title {
+  display: block;
+  font-family: $serif-font-stack;
+  text-align: center;
+}
+
+// We always surround input by divs if we want to contain the size
+input {
+  &[type='text'] {
+    width: 100%;
+  }
+}
+
+table {
+  border: $default-table-border $default-table-border-color;
+  border-collapse: collapse;
+  max-width: 100%;
+
+  & th,
+  & thead {
+    background-color: $default-table-heading-background-colour;
+
+    & th {
+      border-bottom: $default-table-border $default-table-border-color;
+    }
+  }
+
+  & tbody {
+    & tr {
+      &:nth-child(even) {
+        background-color: $default-table-even-row-background-color;
+      }
+
+    }
+  }
+}
+
+tr {
+  & td {
+    border-bottom: $default-table-border $default-table-border-color;
+    border-left: $default-table-border $default-table-border-color;
+
+    &:first-of-type {
+      border-left: 0 none;
+    }
+  }
+
+  & th {
+    border-bottom: $default-table-border $default-table-border-color;
+    border-left: $default-table-border $default-table-border-color;
+
+    &:first-of-type {
+      border-left: 0 none;
+    }
+  }
+}
+
+@media screen {
+  * {
+    box-sizing: border-box;
+  }
+}
+
+
+@media not speech {
+  html {
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 28em) {
+  html {
+    font-size: 17px;
+  }
+}
+
+@media screen and (min-width: 36em) {
+  html {
+    font-size: 18px;
+  }
+}
+
+@media screen and (min-width: 48em) {
+  html {
+    font-size: 19px;
+  }
+}
+
+@media screen and (min-width: 56em) {
+  html {
+    font-size: 20px;
+  }
+}
+
+@media screen and (min-width: 64em) {
+  html {
+    font-size: 21px;
+  }
+}

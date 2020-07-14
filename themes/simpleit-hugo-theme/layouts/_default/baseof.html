@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="{{.Lang}}" itemscope="" itemtype="{{- block "body-schema" . -}}http://schema.org/WebPage{{- end -}}">
+    <head>
+	{{- partial "head.html" . -}}
+    </head>
+    <body>
+	<meta itemprop="url" content="{{.Permalink}}" />
+
+        {{- partial "header.html" . -}}
+        {{- block "main" . -}}{{- end -}}
+        {{- partial "footer_meta.html" . -}}
+    </body>
+</html>

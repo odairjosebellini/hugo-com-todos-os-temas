@@ -1,0 +1,18 @@
+{{- $curCtx := . -}}
+{{- $scratch := newScratch -}}
+<!-- find whether we're a leaf section -->
+{{- $nextNodes := ( partial "generic-site-menu/nodes-included" ( dict "nodes" .Site.Home.Pages "menu_node" .Site.Home "menu_type" "local-nav" ) ) -}}
+{{- if $nextNodes -}}
+  {{- if (first 1 $nextNodes) -}}
+    {{/*We have children so use first child*/}}
+    {{- range (first 1 $nextNodes) -}}
+      <a class="enter-button" href="{{ .RelPermalink }}">Enter Site</a>
+    {{- end -}}
+  {{- else -}}
+    {{/*We don't actually have children*/}}
+    <a class="enter-button" href="{{ "." }}">Site does not exist</a>
+  {{- end -}}
+{{- else -}}
+  {{/*No children so we are a leaf*/}}
+  <a class="enter-button" href="{{ "." }}">Site does not exist</a>
+{{- end -}}

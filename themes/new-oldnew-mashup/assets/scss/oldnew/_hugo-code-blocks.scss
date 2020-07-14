@@ -1,0 +1,320 @@
+// sass-lint:disable no-color-literals
+
+@mixin hugo-code-block {
+  & code {
+    background-color: $default-pre-background-color;
+    color: $default-pre-text-color;
+    display: block;
+    width: 100%;
+
+    & a {
+      &:link {
+        color: $default-pre-link-color;
+      }
+
+      &:active,
+      &:hover {
+        color: $default-pre-hover-color;
+      }
+    }
+  }
+}
+
+.chroma {
+  @include hugo-code-block;
+
+  background-color: #272822; // Background
+  color: #f8f8f2; // Default text
+
+  display: block;
+  overflow: hidden;
+  padding-bottom: 12px;
+
+  &:active,
+  &:hover {
+    overflow-x: scroll;
+    padding-bottom: 0;
+  }
+
+
+  & .err {  //  Error
+    background-color: #1e0010;
+    color: #960050;
+  }
+
+  & .lntd {  //  LineTableTD
+    border: 0;
+    margin: 0;
+    padding: 0;
+    vertical-align: top;
+  }
+
+  & .lntable {  //  LineTable
+    border: 0;
+    border-spacing: 0;
+    display: block;
+    margin: 0;
+    overflow-x: scroll;
+    padding: 0;
+    width: auto;
+  }
+
+  & .hl {  //  LineHighlight
+    background-color: #ffc;
+    display: block;
+    width: 100%;
+  }
+
+  & .lnt { //  LineNumbersTable
+    margin-right: .4em;
+    padding: 0 .4em;
+  }
+
+  & .ln {  //  LineNumbers
+    margin-right: .4em;
+    padding: 0 .4em;
+  }
+
+  & .k {  //  Keyword
+    color: #66d9ef;
+  }
+
+  & .kc { //  KeywordConstant
+    color: #66d9ef;
+  }
+
+  & .kd { //  KeywordDeclaration
+    color: #66d9ef;
+  }
+
+  & .kn { //  KeywordNamespace
+    color: #f92672;
+  }
+
+  & .kp { //  KeywordPseudo
+    color: #66d9ef;
+  }
+
+  & .kr { //  KeywordReserved
+    color: #66d9ef;
+  }
+
+  & .kt { //  KeywordType
+    color: #66d9ef;
+  }
+
+  & .na { //  NameAttribute
+    color: #a6e22e;
+  }
+
+  & .nc { //  NameClass
+    color: #a6e22e;
+  }
+
+  & .no { //  NameConstant
+    color: #66d9ef;
+  }
+
+  & .nd { //  NameDecorator
+    color: #a6e22e;
+  }
+
+  & .ne { //  NameException
+    color: #a6e22e;
+  }
+
+  & .nf { //  NameFunction
+    color: #a6e22e;
+  }
+
+  & .nx { //  NameOther
+    color: #a6e22e;
+  }
+
+  & .nt { //  NameTag
+    color: #f92672;
+  }
+
+  & .l { //  Literal
+    color: #ae81ff;
+  }
+
+  & .ld { //  LiteralDate
+    color: #e6db74;
+  }
+
+  & .s { //  LiteralString
+    color: #e6db74;
+  }
+
+  & .sa { //  LiteralStringAffix
+    color: #e6db74;
+  }
+
+  & .sb { //  LiteralStringBacktick
+    color: #e6db74;
+  }
+
+  & .sc { //  LiteralStringChar
+    color: #e6db74;
+  }
+
+  & .dl { //  LiteralStringDelimiter
+    color: #e6db74;
+  }
+
+  & .sd { //  LiteralStringDoc
+    color: #e6db74;
+  }
+
+  & .s2 { //  LiteralStringDouble
+    color: #e6db74;
+  }
+
+  & .se { //  LiteralStringEscape
+    color: #ae81ff;
+  }
+
+  & .sh { //  LiteralStringHeredoc
+    color: #e6db74;
+  }
+
+  & .si { //  LiteralStringInterpol
+    color: #e6db74;
+  }
+
+  & .sx { //  LiteralStringOther
+    color: #e6db74;
+  }
+
+  & .sr { //  LiteralStringRegex
+    color: #e6db74;
+  }
+
+  & .s1 { //  LiteralStringSingle
+    color: #e6db74;
+  }
+
+  & .ss { //  LiteralStringSymbol
+    color: #e6db74;
+  }
+
+  & .m { //  LiteralNumber
+    color: #ae81ff;
+  }
+
+  & .mb { //  LiteralNumberBin
+    color: #ae81ff;
+  }
+
+  & .mf { //  LiteralNumberFloat
+    color: #ae81ff;
+  }
+
+  & .mh { //  LiteralNumberHex
+    color: #ae81ff;
+  }
+
+  & .mi { //  LiteralNumberInteger
+    color: #ae81ff;
+  }
+
+  & .il { //  LiteralNumberIntegerLong
+    color: #ae81ff;
+  }
+
+  & .mo { //  LiteralNumberOct
+    color: #ae81ff;
+  }
+
+  & .o { //  Operator
+    color: #f92672;
+  }
+
+  & .ow { //  OperatorWord
+    color: #f92672;
+  }
+
+  & .c { //  Comment
+    color: #97927f;
+  }
+
+  & .ch { //  CommentHashbang
+    color: #97927f;
+  }
+
+  & .cm { //  CommentMultiline
+    color: #97927f;
+  }
+
+  & .c1 { //  CommentSingle
+    color: #97927f;
+  }
+
+  & .cs { //  CommentSpecial
+    color: #97927f;
+  }
+
+  & .cp { //  CommentPreproc
+    color: #97927f;
+  }
+
+  & .cpf { //  CommentPreprocFile
+    color: #97927f;
+  }
+
+  & .gd { //  GenericDeleted
+    color: #f92672;
+  }
+
+  & .ge { //  GenericEmph
+    font-style: italic;
+  }
+
+  & .gi { //  GenericInserted
+    color: #a6e22e;
+  }
+
+  & .gs { //  GenericStrong
+    font-weight: bold;
+  }
+
+  & .gu { //  GenericSubheading
+    color: #97927f;
+  }
+}
+
+pre {
+  @include hugo-code-block;
+
+  display: block;
+  overflow: hidden;
+  padding-bottom: 12px;
+
+  &:active,
+  &:hover {
+    overflow-x: scroll;
+    padding-bottom: 0;
+  }
+
+}
+
+.highlight {
+  display: block;
+  resize: none;
+  width: 100%;
+
+  & > pre {
+    @include hugo-code-block;
+
+    display: block;
+    overflow: hidden;
+    padding-bottom: 12px;
+
+    &:active,
+    &:hover {
+      overflow-x: scroll;
+      padding-bottom: 0;
+    }
+  }
+}

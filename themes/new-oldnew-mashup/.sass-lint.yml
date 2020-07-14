@@ -1,0 +1,12 @@
+---
+options:
+  formatter: stylish
+  merge-default-rules: true
+files:
+  include: '**/*.s+(a|c)ss'
+  ignore:
+    - 'assets/css/oldnew-vars.scss'
+    - 'assets/scss/oldnew/_printcss.scss'
+    - '_vendor/**'
+    - '**/_vendor/**'
+rules:
