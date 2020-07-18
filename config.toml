@@ -1,11 +1,6 @@
 baseURL = "https://hugo-com-todos-os-temas.netlify.app"
 languageCode = "pt-br"
 title = "Meu primeiro site Hugo"
-# Estes parâmetros abaixo são específicos para o tema "bootstrap-bp-hugo-startpage".
-[[params.searchEngines]]
-  name = "DuckDuckGo"
-  activated = true
-  url = "https://duckduckgo.com/"
 #
 # Como eu baixei todos os temas, é só descomentar o tema que você quer escolher abaixo:
 #
